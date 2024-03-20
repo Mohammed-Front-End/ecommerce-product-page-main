@@ -130,22 +130,18 @@ nav .buy .avatar:hover img {
 
 
 /* Styles for burger menu in smaller screens */
-@media (max-width: 768px) {
   @media (max-width: 768px) {
     .burger-menu {
       display: block;
       padding: 0 20px;
     }
-  
     .burger-icon {
       width: 30px;
       height: 4px;
       background-color: hsl(219, 9%, 45%);
       position: relative;
       transition: transform 0.3s;
-      top: -10px; /* Added */
     }
-  
     .burger-icon::before,
     .burger-icon::after {
       content: '';
@@ -157,13 +153,12 @@ nav .buy .avatar:hover img {
     }
   
     .burger-icon::before {
-      bottom: -10px; /* Updated */
+      top: -10px;
     }
   
     .burger-icon::after {
       bottom: -10px;
     }
-  
     .burger-menu.open .burger-icon {
       transform: rotate(45deg);
     }
@@ -171,11 +166,6 @@ nav .buy .avatar:hover img {
     .burger-menu.open .burger-icon::before {
       transform: translateY(10px) rotate(-90deg);
     }
-  
-    .burger-menu.open .burger-icon::after {
-      transform: translateY(-10px) rotate(90deg);
-    }
-  }
 }
 
 /* Media query for mobile devices */
