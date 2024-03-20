@@ -177,6 +177,9 @@ nav .buy .avatar:hover img {
     flex-direction: column;
     align-items: flex-start;
   }
+  nav .logo {
+    padding: 2.3rem 0;
+  }
   .menu-links.open {
     display: flex;
     left: 0; /* Move the menu onto the screen */
