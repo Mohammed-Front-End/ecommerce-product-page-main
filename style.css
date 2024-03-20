@@ -1,0 +1,263 @@
+@font-face {
+  font-family: "KumbhSans";
+  src: url("./Fonts/KumbhSans.woff2") format("woff2");
+  font-weight: 100 900;
+}
+/* 
+## Colors ##
+### Primary
+- Orange: hsl(26, 100%, 55%)
+- Pale orange: hsl(25, 100%, 94%)
+### Neutral
+- Very dark blue: hsl(220, 13%, 13%)
+- Dark grayish blue: hsl(219, 9%, 45%)
+- Grayish blue: hsl(220, 14%, 75%)
+- Light grayish blue: hsl(223, 64%, 98%)
+- White: hsl(0, 0%, 100%)
+- Black (with 75% opacity for lightbox background): hsl(0, 0%, 0%)
+*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style-type: none;
+}
+body {
+  font-family: "KumbhSans";
+}
+/* Start Navigation  bar */
+header {
+  border-bottom: 2px solid hsl(223, 64%, 98%);
+  height: 96px;
+  padding: 0 10px;
+}
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  align-items: center;
+  justify-content: flex-start;
+}
+.burger-menu {
+  display: none; /* Hide by default */
+  cursor: pointer;
+}
+.burger-icon {
+  display: block;
+  width: 30px;
+  height: 4px;
+  background-color: #333;
+  margin: 6px auto;
+  transition: background-color 0.3s, transform 0.3s;
+}
+#burger-checkbox {
+  display: none;
+}
+
+nav .logo {
+  padding: 2.3rem 10px;
+}
+nav ul {
+  display: flex;
+  flex: 1;
+  align-items: center;
+}
+nav ul li {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-basis: 100%;
+  justify-content: center;
+}
+nav ul li a {
+  color: hsl(219, 9%, 45%);
+  font-size: 1.2rem;
+  position: relative;
+  transition: color 0.4s;
+  padding: 2.3rem 14px;
+}
+nav ul li:hover a {
+  color: hsl(0, 0%, 0%);
+}
+nav ul li a::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0%;
+  height: 3px;
+  background-color: transparent;
+  transition: width 0.4s;
+}
+nav ul li:hover a::before {
+  background-color: hsl(26, 100%, 55%);
+  width: 100%;
+}
+nav .buy {
+  display: flex;
+  max-height: 100%;
+  flex: 1;
+  align-items: center;
+  justify-content: flex-end;
+}
+nav .buy .cart {
+  padding: 1rem;
+}
+nav .buy .avatar {
+  padding: 1rem;
+}
+nav .buy .avatar img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  transition: border-color 0.3s;
+}
+nav .buy .avatar:hover img {
+  border-color: hsl(26, 100%, 55%);
+}
+
+#overlay {
+  display: none;
+}
+.menu-links .close {
+  display: none;
+}
+
+.burger-menu {
+  display: block;
+  padding: 0 20px;
+}
+
+.burger-icon {
+  width: 30px;
+  height: 4px;
+  background-color: hsl(219, 9%, 45%);
+  position: relative;
+  transition: transform 0.3s;
+}
+
+.burger-icon::before,
+.burger-icon::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 4px;
+  background-color: hsl(219, 9%, 45%);
+  transition: transform 0.3s;
+}
+
+.burger-icon::before {
+  top: -10px;
+}
+
+.burger-icon::after {
+  bottom: -10px;
+}
+
+.burger-menu.open .burger-icon {
+  transform: rotate(45deg);
+}
+
+.burger-menu.open .burger-icon::before {
+  transform: translateY(10px) rotate(-90deg);
+}
+
+.burger-menu.open .burger-icon::after {
+  transform: translateY(-10px) rotate(90deg);
+}
+
+/* Styles for burger menu in smaller screens */
+@media (max-width: 768px) {
+  .burger-icon::before {
+    top: -10px; /* Original top position */
+    transition: transform 0.3s; /* Added transition property */
+  }
+
+  .burger-icon::after {
+    bottom: -10px; /* Original bottom position */
+    transition: transform 0.3s; /* Added transition property */
+  }
+
+  .burger-menu.open .burger-icon::before {
+    transform: translateY(10px) rotate(-90deg); /* Transformed position for open state */
+  }
+
+  .burger-menu.open .burger-icon::after {
+    transform: translateY(-10px) rotate(90deg); /* Transformed position for open state */
+  }
+}
+
+/* Media query for mobile devices */
+@media (max-width: 768px) {
+  /* Hide menu links by default */
+  .menu-links {
+    position: fixed;
+    top: 0;
+    left: -100%; /* Initially off screen */
+    width: 60%;
+    height: 100%;
+    background-color: hsl(223, 64%, 98%);
+    z-index: 998;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .menu-links.open {
+    display: flex;
+    left: 0; /* Move the menu onto the screen */
+    transition: left 0.3s; /* Add transition property only when opening */
+  }
+  .menu-links .close {
+    display: block;
+    font-size: 33px;
+    width: 100%;
+    padding: 17px 40px;
+    cursor: pointer;
+    font-family: "KumbhSans";
+  }
+  #overlay {
+    position: absolute;
+    display: block;
+    left: 100%;
+    width: 67%;
+    height: 100%;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 2;
+    cursor: pointer;
+  }
+  .menu-links .avatar {
+    display: block;
+    font-size: 33px;
+    width: 100%;
+    padding: 17px 40px;
+    cursor: pointer;
+  }
+  nav ul li {
+    flex-basis: 0%;
+    padding-left: 2.3rem;
+  }
+  nav ul li a {
+    padding: 2.3rem 0;
+  }
+  /* Show menu links when burger menu icon is clicked */
+  #burger-checkbox:checked + .burger-menu + .menu-links {
+    display: block;
+    left: 0%;
+  }
+
+  .menu-links ul {
+    display: block;
+    text-align: center;
+    padding-top: 100px; /* Adjust as needed */
+  }
+
+  .menu-links ul li {
+    display: block;
+    margin-bottom: 20px;
+  }
+}

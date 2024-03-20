@@ -4,41 +4,45 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
 
-  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
-  
-  <title>Frontend Mentor | E-commerce product page</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png" >
 
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-  <style>
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
-  </style>
+  <link rel="preload" as="font" crossorigin="anonymous" type="font/woff2" href="./Fonts/KumbhSans.woff2">
+
+  <link rel="stylesheet" href="style.css">
+  <title>Frontend Mentor | E-commerce product page</title>
 </head>
 <body>
+  <header>
 
-  Collections
-  Men
-  Women
-  About
-  Contact
+    <nav>
 
-  Sneaker Company
-
-  Fall Limited Edition Sneakers
-
-  These low-profile sneakers are your perfect casual wear companion. Featuring a 
-  durable rubber outer sole, they’ll withstand everything the weather can offer.
-
-  $125.00
-  50%
-  $250.00
-
-  0
-  Add to cart
+      <input type="checkbox" id="burger-checkbox">
+      <label for="burger-checkbox" class="burger-menu">
+        <span class="burger-icon"></span>
+      </label>
   
-  <div class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
-  </div>
+
+
+      <div class="logo">
+        <a href="#"><img src="./images/logo.svg" alt="logo"></a>
+      </div>
+
+      <ul class="menu-links">
+        <div id="overlay"  onclick="closeMenu()"></div>
+        <div class="close" onclick="closeMenu()">X</div>
+
+        <li><a href="#">Collections</a></li>
+        <li><a href="#">Men</a></li>
+        <li><a href="#">Wowmen</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+      <div class="buy">
+        <a class="cart" href=""><img src="./images/icon-cart.svg" alt=""></a>
+        <a class="avatar" href=""><img src="./images/image-avatar.png" alt=""></a>
+      </div>
+    </nav>
+  </header>
+  <script src="./script.js"></script>
 </body>
 </html>
