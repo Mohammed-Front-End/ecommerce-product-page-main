@@ -14,22 +14,24 @@
 <body>
   <header>
 
+
+
+
+
     <nav>
 
       <input type="checkbox" id="burger-checkbox">
       <label for="burger-checkbox" class="burger-menu">
         <span class="burger-icon"></span>
       </label>
-  
-
 
       <div class="logo">
         <a href="#"><img src="./images/logo.svg" alt="logo"></a>
       </div>
 
-      <ul class="menu-links">
-        <div id="overlay"  onclick="closeMenu()"></div>
-        <div class="close" onclick="closeMenu()">X</div>
+      <div id="overlay" ></div>
+      <ul class="menu-links" aria-expanded="false" >
+        <button aria-label="close" aria-expanded="false" class="close">X</button>
 
         <li><a href="#">Collections</a></li>
         <li><a href="#">Men</a></li>
