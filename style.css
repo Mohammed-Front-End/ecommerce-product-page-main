@@ -194,8 +194,21 @@ nav .buy .avatar:hover img {
     border: none;
     text-align: left;
   }
-
-
+  #overlay {
+    position: fixed;
+    display: block;
+    width: 35%;
+    height: 100%;
+    right: 0;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 2;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.3s, visibility 0.3s;
+  }
   .menu-links .avatar {
     display: block;
     font-size: 33px;
@@ -225,20 +238,4 @@ nav .buy .avatar:hover img {
     margin-bottom: 20px;
   }
 
-  #overlay {
-    position: fixed;
-    display: block;
-    width: 35%;
-    height: 100%;
-    right: 0;
-    top: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 2;
-    cursor: pointer;
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transition: opacity 0.5s, visibility 0.5s;
-  }
-  
 }
