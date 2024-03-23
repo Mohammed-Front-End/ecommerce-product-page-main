@@ -1,50 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
 
-  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png" >
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
 
-  <link rel="preload" as="font" crossorigin="anonymous" type="font/woff2" href="./Fonts/KumbhSans.woff2">
+    <link rel="preload" as="font" crossorigin="anonymous" type="font/woff2" href="./Fonts/KumbhSans.woff2">
 
-  <link rel="stylesheet" href="style.css">
-  <title>Frontend Mentor | E-commerce product page</title>
-</head>
-<body>
-  <header>
+    <link rel="stylesheet" href="style.css" />
+    <title>Frontend Mentor | E-commerce product page</title>
+  </head>
+  <body>
+    <!-- Start header -->
+    <header>
+      <nav>
+        <input type="checkbox" id="burger-checkbox" />
+        <label for="burger-checkbox" class="burger-menu"></label>
+        <div class="logo">
+          <a href="#"><img src="./images/logo.svg" alt="logo" /></a>
+        </div>
+        <div id="overlay"></div>
+        <ul class="menu-links" aria-expanded="false">
+          <button aria-label="close" aria-expanded="false" class="close"></button>
+          <li><a href="#">Collections</a></li>
+          <li><a href="#">Men</a></li>
+          <li><a href="#">Wowmen</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+        <div class="buy">
+          <a class="cart" href=""
+            ><img src="./images/icon-cart.svg" alt="icon-add-cart."
+          /></a>
+          <a class="avatar" href=""
+            ><img src="./images/image-avatar.png" alt="image-avatar"
+          /></a>
+        </div>
+      </nav>
+    </header>
+    <!-- End header -->
+    <!-- Start Product -->
+    <main>
+      <div class="container">
 
+      <Section class="imgs-Product">
+        <div id="MasterImg">
+          <img src="./images/image-product-1.jpg" alt="1">
+        </div>
 
+        <div id="underContainer">
+          <img src="./images/image-product-1-thumbnail.jpg" alt="1">
+          <img src="./images/image-product-2-thumbnail.jpg" alt="2">
+          <img src="./images/image-product-3-thumbnail.jpg" alt="3">
+          <img src="./images/image-product-4-thumbnail.jpg" alt="4">
+        </div> 
 
+      </Section>
+      <div id="overlay-imgs-Product" class="overlay-imgs-Product">
+        <div class="modal-content">
+          <button id="closeButton"></button>
+          <button id="prevButton"></button>
+          <button id="nextButton"></button>
+          <div id="mainImgContainer">
 
+          </div>
+          <!-- Special div for target image -->
+          <div id="underlayImgsContainer"></div> <!-- Container for underlay images -->
+        </div>
 
-    <nav>
-
-      <input type="checkbox" id="burger-checkbox">
-      <label for="burger-checkbox" class="burger-menu">
-        <span class="burger-icon"></span>
-      </label>
-
-      <div class="logo">
-        <a href="#"><img src="./images/logo.svg" alt="logo"></a>
       </div>
 
-      <div id="overlay" ></div>
-      <ul class="menu-links" aria-expanded="false" >
-        <button aria-label="close" aria-expanded="false" class="close">X</button>
 
-        <li><a href="#">Collections</a></li>
-        <li><a href="#">Men</a></li>
-        <li><a href="#">Wowmen</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Contact</a></li>
-      </ul>
-      <div class="buy">
-        <a class="cart" href=""><img src="./images/icon-cart.svg" alt=""></a>
-        <a class="avatar" href=""><img src="./images/image-avatar.png" alt=""></a>
-      </div>
-    </nav>
-  </header>
-  <script src="./script.js"></script>
-</body>
+      <Section class="imgs-price">
+        <span>Sneaker company</span>
+        <h1>fall limited edition sneakers</h1>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid expedita sequi perspiciatis eveniet facere praesentium perferendis sed alias aspernatur. Id voluptates sed perspiciatis fugiat iure voluptate odio, excepturi ipsum inventore.
+        </p>
+
+        <div class="span-price"> 
+          <div class="price">
+            <span>$125.00</span>
+            <i class="dicont">50%</i>
+          </div>
+          <i class="original-price">$250.00</i>
+        </div>
+
+        <div class="plus-minus">
+
+          <div class="add-remove">
+            <button class="minus"><img src="./images/icon-minus.svg" alt="icon-minus" ></button>
+            <span>0</span>
+            <button class="plus"><img src="./images/icon-plus.svg" alt="icon-plus"></button>
+          </div>
+
+          <button class="add-btn"><img src="./images/icon-cart.svg" alt="icon-cart"> Add to cart</button>
+        </div>
+      </Section>
+    </div>
+    </main>
+    <!-- End Product -->
+    <script defer src="./script.js"></script>
+  </body>
 </html>
