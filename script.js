@@ -121,3 +121,68 @@ document.addEventListener('DOMContentLoaded', function() {
     underlayImgsContainer.appendChild(thumbnailImg);
   }
 });
+
+
+
+let minus = document.querySelector('.minus');
+let plus = document.querySelector('.plus');
+let addRemove = document.querySelector('.add-remove span')
+let addCart = document.querySelector('.add-btn')
+let price = document.querySelector('.price span')
+let nameProduct = document.querySelector('.imgs-price h1')
+let numberOfProcduct = document.querySelector('.cart span')
+
+function updateDisplay() {
+  if (numberOfProcduct.innerHTML === '0' || numberOfProcduct.textContent === '') {
+      numberOfProcduct.style.display = 'none';
+  } else {
+      numberOfProcduct.style.display = 'flex';
+  }
+}
+updateDisplay() 
+
+document.addEventListener('DOMContentLoaded', function() {
+
+
+  let quantity = 15;
+  plus.addEventListener('click',function(e){
+    let currentValue = parseInt(addRemove.innerHTML);
+    console.log(currentValue);
+    
+    let incressingValue = currentValue + 1;
+    if(addRemove.innerHTML < quantity){
+      addRemove.innerHTML = incressingValue;
+    }else{
+      console.log("Maximum value reached!");
+    }
+  });
+  minus.addEventListener('click',function(e){
+    let currentValue = parseInt(addRemove.innerHTML);
+    let decreasingValue = currentValue - 1;
+    if(addRemove.innerHTML > 0){
+      addRemove.innerHTML = decreasingValue;
+    }else{
+      console.log("min value reached!");
+    }
+  })
+
+  addCart.addEventListener('click', function (e){
+    let currentValue = parseInt(addRemove.innerHTML);
+    let ArrayProduct = [];
+    let newPrice = parseInt(price.innerHTML.replace(/[^0-9.]/g, "")) ;
+    let name = nameProduct.innerHTML;
+    ArrayProduct.push(currentValue,newPrice,name)
+    numberOfProcduct.innerHTML = currentValue;
+    updateDisplay() 
+    
+    
+    console.log(newPrice * currentValue);
+    console.log(ArrayProduct);
+    
+  })
+
+});
+
+
+
+

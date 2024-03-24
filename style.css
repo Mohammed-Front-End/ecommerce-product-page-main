@@ -83,13 +83,110 @@ nav ul li:hover a::before {
 nav .buy {
   display: flex;
   max-height: 100%;
+  position: relative;
   flex: 1;
   align-items: center;
   justify-content: flex-end;
 }
 nav .buy .cart {
   padding: 1rem;
+  position: relative;
 }
+nav .buy .cart span{
+  position: absolute;
+  display: flex;
+  width: 20px;
+  height: 20px;
+  background-color: hsl(26, 100%, 55%);
+  justify-content: center;
+  align-items: center;
+  color: hsl(223, 64%, 98%);
+  top: 10%;
+  right: 11px;
+  border-radius: 50%;
+}
+
+
+
+
+.show-Product {
+  background-color: hsl(223, 64%, 98%);
+  position: absolute;
+  width: 350px;
+  top: 100%;
+  left: 68%;
+  transform: translate(-50%, 0%);
+  box-shadow: 3px 2px 20px #575353;
+}
+.show-Product .cart-name{
+  padding: 10px 20px;
+  border-bottom: 2px solid hsl(223deg 17.32% 89.7%);
+  font-weight: 600;
+}
+.show-Product section{
+  padding: 20px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.show-Product section img{
+  width: 50px;
+}
+.show-Product section .name-and-price{
+  padding: 0 11px;
+}
+.name-and-price p{
+  display: inline;
+  color: #959090;
+}
+.show-Product section .name-and-price .nameProduct{
+  text-transform: capitalize;
+}
+.show-Product section .name-and-price .price-product{}
+.show-Product section .name-and-price .cont-product{
+}
+.show-Product section .name-and-price .totle-price{
+  font-weight: 800;
+  color: black;
+}
+.show-Product section .delete{
+  background-image: url(./images/icon-delete.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: auto;
+  height: 1rem;
+  padding: 0px 6px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+
+}
+.show-Product .Checkout{
+  padding: 16px 105px;
+  width: 90%;
+  margin: 21px;
+  margin-top: 0;
+  display: flex;
+  justify-content: center;
+  border: none;
+  border-radius: 9px;
+  background-color: hsl(26, 100%, 55%);
+  color: hsl(223, 64%, 98%);
+  cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 nav .buy .avatar {
   padding: 1rem;
 }
@@ -245,6 +342,9 @@ nav #overlay {
     width: 100%;
     flex-wrap: wrap;
   }
+  #underContainer img:first-child{
+    opacity: 0.3;
+  }
   #underContainer img{
     height: 100px;
     border-radius: 15px;
@@ -252,10 +352,7 @@ nav #overlay {
     border: 2px solid transparent;
     transition: border-color 0.3s;
   }
-  #underContainer:first-child{
-    border-radius: 15px;
-    opacity: 0.3;
-  }
+
   #underContainer img:hover{
     border-color: hsl(26, 100%, 55%);
     opacity: 0.6;
