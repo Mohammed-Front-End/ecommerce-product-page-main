@@ -89,8 +89,11 @@ nav .buy {
   justify-content: flex-end;
 }
 nav .buy .cart {
-  padding: 1rem;
+  padding: 0rem;
+  background-color: transparent;
   position: relative;
+  border: none;
+  cursor: pointer;
 }
 nav .buy .cart span{
   position: absolute;
@@ -110,6 +113,7 @@ nav .buy .cart span{
 
 
 .show-Product {
+  display: none;
   background-color: hsl(223, 64%, 98%);
   position: absolute;
   width: 350px;
@@ -143,7 +147,7 @@ nav .buy .cart span{
   text-transform: capitalize;
 }
 .show-Product section .name-and-price .price-product{}
-.show-Product section .name-and-price .cont-product{
+.show-Product section .name-and-price .count-product{
 }
 .show-Product section .name-and-price .totle-price{
   font-weight: 800;

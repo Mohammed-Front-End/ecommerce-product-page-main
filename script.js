@@ -131,6 +131,8 @@ let addCart = document.querySelector('.add-btn')
 let price = document.querySelector('.price span')
 let nameProduct = document.querySelector('.imgs-price h1')
 let numberOfProcduct = document.querySelector('.cart span')
+let cart = document.querySelector('.cart')
+let showProduct = document.querySelector('.show-Product');
 
 function updateDisplay() {
   if (numberOfProcduct.innerHTML === '0' || numberOfProcduct.textContent === '') {
@@ -141,9 +143,18 @@ function updateDisplay() {
 }
 updateDisplay() 
 
+// display cart and hide 
+cart.addEventListener('click',function(e){
+  if(showProduct.style.display === 'none'){
+    showProduct.style.display = 'block';
+  }else{
+    showProduct.style.display = 'none';
+  }
+  e.preventDefault();
+});
+
+
 document.addEventListener('DOMContentLoaded', function() {
-
-
   let quantity = 15;
   plus.addEventListener('click',function(e){
     let currentValue = parseInt(addRemove.innerHTML);
@@ -165,7 +176,6 @@ document.addEventListener('DOMContentLoaded', function() {
       console.log("min value reached!");
     }
   })
-
   addCart.addEventListener('click', function (e){
     let currentValue = parseInt(addRemove.innerHTML);
     let ArrayProduct = [];
@@ -174,14 +184,39 @@ document.addEventListener('DOMContentLoaded', function() {
     ArrayProduct.push(currentValue,newPrice,name)
     numberOfProcduct.innerHTML = currentValue;
     updateDisplay() 
-    
-    
-    console.log(newPrice * currentValue);
-    console.log(ArrayProduct);
-    
+      
+  let nameProductInCar = document.querySelector('.nameProduct');
+  let priceProduct = document.querySelector('.price-product');
+  let countProduct = document.querySelector('.count-product');
+  let totlePrice = document.querySelector('.totle-price');
+  let deleteProduct = document.querySelector('.delete');
+  
+  nameProductInCar.innerHTML = ArrayProduct[2];
+  priceProduct.innerHTML = `$${ArrayProduct[1]}.00`;
+  countProduct.innerHTML = ` x ${ArrayProduct[0]} ` ;
+  totlePrice.innerHTML = `$${ArrayProduct[0] * ArrayProduct[1]}.00 ` ;
+
+
+  deleteProduct.addEventListener('click',function(){
+    ArrayProduct[0]--;
+    if(ArrayProduct[0] >= 0){
+    countProduct.innerHTML = ` x ${ArrayProduct[0]}` ;
+    const totalPrice = ArrayProduct[0] * ArrayProduct[1]; 
+    totlePrice.innerHTML = `$${totalPrice}.00`;
+    }else{
+      console.log("min value reached!");
+    }
+  })
   })
 
+
+  
 });
+
+
+
+
+
 
 
 
