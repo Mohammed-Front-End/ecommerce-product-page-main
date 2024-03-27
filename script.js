@@ -38,85 +38,89 @@
     closeButtonMenu.setAttribute("aria-expanded", "false");
   });
 
+
+
+
+  
 // Start Product 
 // Products imges 
-  const imgs = document.querySelectorAll('.imgs-Product img');
-  const overlay = document.getElementById('overlay-imgs-Product');
-  const mainImgContainer = document.getElementById('mainImgContainer');
-  const underlayImgsContainer = document.getElementById('underlayImgsContainer');
+const imgs = document.querySelectorAll('.imgs-Product img');
+const overlay = document.getElementById('overlay-imgs-Product');
+const mainImgContainer = document.getElementById('mainImgContainer');
+const underlayImgsContainer = document.getElementById('underlayImgsContainer');
 
-  let currentIndex = 0; 
-  // Track the index of the currently displayed image
+let currentIndex = 0; 
+// Track the index of the currently displayed image
+
+// Function to display the image at the specified index
+function displayImage(index) {
+  const img = imgs[index];
+  const imgSrc = img.src.split('-thumbnail').join('');
+  console.log(imgSrc);
+
+  const imgAlt = img.alt;
+  console.log(img);
+  mainImgContainer.innerHTML = `<img src="${imgSrc}" alt="${imgAlt}">`; // Display the clicked image
+  currentIndex = index;
   
-  // Function to display the image at the specified index
-  function displayImage(index) {
-    const img = imgs[index];
-    const imgSrc = img.src.split('-thumbnail').join('');
-    console.log(imgSrc);
-
-    const imgAlt = img.alt;
-    console.log(img);
-    mainImgContainer.innerHTML = `<img src="${imgSrc}" alt="${imgAlt}">`; // Display the clicked image
-    currentIndex = index;
-    
-    // Show all other images underneath the clicked image
-    underlayImgsContainer.innerHTML = ''; // Clear previous underlay images
-    imgs.forEach((img, i) => {
-      if (i !== index) {
-        const imgClone = img.cloneNode(true); // Create a clone of the image
-        imgClone.classList.add('underlay-img'); // Add a class to differentiate underlay images
-        underlayImgsContainer.appendChild(imgClone); // Append the cloned image to the underlay images container
-      }
-    });
-  }
-
-  // Function to show the overlay and display the first image
-  function showOverlay() {
-    overlay.style.display = 'flex'; // Display the overlay
-    displayImage(0); // Display the first image
-  }
-
-  // Event listeners for each image
-  imgs.forEach((img, index) => {
-    img.addEventListener('click', function() {
-      showOverlay(); // Show overlay when an image is clicked
-    });
+  // Show all other images underneath the clicked image
+  underlayImgsContainer.innerHTML = ''; // Clear previous underlay images
+  imgs.forEach((img, i) => {
+    if (i !== index) {
+      const imgClone = img.cloneNode(true); // Create a clone of the image
+      imgClone.classList.add('underlay-img'); // Add a class to differentiate underlay images
+      underlayImgsContainer.appendChild(imgClone); // Append the cloned image to the underlay images container
+    }
   });
+}
 
-  // Previous button event listener
-  const prevButton = document.getElementById('prevButton');
-  prevButton.addEventListener('click', function() {
-    currentIndex = (currentIndex - 1 + imgs.length) % imgs.length; // Move to the previous image
-    displayImage(currentIndex);
-  });
+// Function to show the overlay and display the first image
+function showOverlay() {
+  overlay.style.display = 'flex'; // Display the overlay
+  displayImage(0); // Display the first image
+}
 
-  // Next button event listener
-  const nextButton = document.getElementById('nextButton');
-  nextButton.addEventListener('click', function() {
-    currentIndex = (currentIndex + 1) % imgs.length; // Move to the next image
-    displayImage(currentIndex);
+// Event listeners for each image
+imgs.forEach((img, index) => {
+  img.addEventListener('click', function() {
+    showOverlay(); // Show overlay when an image is clicked
   });
+});
 
-  // Close button event listener
-  const closeButton = document.getElementById('closeButton');
-  closeButton.addEventListener('click', function() {
-    overlay.style.display = 'none'; // Hide the overlay
-  });
+// Previous button event listener
+const prevButton = document.getElementById('prevButton');
+prevButton.addEventListener('click', function() {
+  currentIndex = (currentIndex - 1 + imgs.length) % imgs.length; // Move to the previous image
+  displayImage(currentIndex);
+});
+
+// Next button event listener
+const nextButton = document.getElementById('nextButton');
+nextButton.addEventListener('click', function() {
+  currentIndex = (currentIndex + 1) % imgs.length; // Move to the next image
+  displayImage(currentIndex);
+});
+
+// Close button event listener
+const closeButton = document.getElementById('closeButton');
+closeButton.addEventListener('click', function() {
+  overlay.style.display = 'none'; // Hide the overlay
+});
   
-  // Add the images dynamically
-  for (let i = 1; i <= 4; i++) {
-    // Create main image element
-    const mainImg = document.createElement('img');
-    mainImg.src = `./images/image-product-${i}.jpg`;
-    mainImg.alt = `Product ${i}`;
-    mainImgContainer.appendChild(mainImg);
+// Add the images dynamically
+for (let i = 1; i <= 4; i++) {
+  // Create main image element
+  const mainImg = document.createElement('img');
+  mainImg.src = `./images/image-product-${i}.jpg`;
+  mainImg.alt = `Product ${i}`;
+  mainImgContainer.appendChild(mainImg);
 
-    // Create thumbnail image element
-    const thumbnailImg = document.createElement('img');
-    thumbnailImg.src = `./images/image-product-${i}-thumbnail.jpg`;
-    thumbnailImg.alt = `Product ${i} Thumbnail`;
-    underlayImgsContainer.appendChild(thumbnailImg);
-  }
+  // Create thumbnail image element
+  const thumbnailImg = document.createElement('img');
+  thumbnailImg.src = `./images/image-product-${i}-thumbnail.jpg`;
+  thumbnailImg.alt = `Product ${i} Thumbnail`;
+  underlayImgsContainer.appendChild(thumbnailImg);
+}
 
 
 
@@ -146,22 +150,26 @@ let imagSection = document.querySelector('.show-Product section img');
 
 // container of prodcut 
 let nameAndPrice = document.querySelector('.name-and-price')
-
-
-  // show-Product 
-  let nameProductInCar = document.querySelector('.nameProduct');
-  let priceProduct = document.querySelector('.price-product');
-  let countProduct = document.querySelector('.count-product');
-  let totlePrice = document.querySelector('.totle-price');
-  let checkout = document.querySelector('.Checkout');
-  let emptySpan = document.querySelector('.emptySpan')
+// show-Product 
+let nameProductInCar = document.querySelector('.nameProduct');
+let priceProduct = document.querySelector('.price-product');
+let countProduct = document.querySelector('.count-product');
+let totlePrice = document.querySelector('.totle-price');
+let checkout = document.querySelector('.Checkout');
+let emptySpan = document.querySelector('.emptySpan')
 
 
 function updateDisplay() {
   if (numberOfProcduct.innerHTML === '0' || numberOfProcduct.textContent === '') {
-      numberOfProcduct.style.display = 'none';
+    numberOfProcduct.style.display = 'none';
+    showProductSection.style.display = 'none';
+    emptySpan.style.display = 'block';
+    checkout.style.display = 'none';
   } else {
-      numberOfProcduct.style.display = 'flex';
+    numberOfProcduct.style.display = 'flex';
+    showProductSection.style.display = 'flex';
+    emptySpan.style.display = 'none';
+    checkout.style.display = 'block';
   }
 }
 // updateDisplay() 
@@ -199,28 +207,22 @@ minus.addEventListener('click',function(e){
 
   // preice item
   let newPrice = parseInt(price.innerHTML.replace(/[^0-9.]/g, ""));
-addCart.addEventListener('click', function (e){
+  addCart.addEventListener('click', function (e){
   let ArrayProduct = [];
-  console.log(ArrayProduct);
-  
+  // console.log(ArrayProduct);
   let quantity = 15;
   // get value number from span product
   let currentValue = parseInt(addRemove.innerHTML);
-  
   let name = nameProduct.innerHTML;
-
   // count of basket
   numberOfProcduct.innerHTML = currentValue;
   updateDisplay();
-  
   // price  span from element price
   nameProductInCar.innerHTML = name;
   priceProduct.innerHTML = `$${newPrice}.00`;
-
   let totalCollection = newPrice  *  currentValue; 
   totlePrice.innerHTML = `$${totalCollection}.00`;
-  console.log(totalCollection);
-
+  // console.log(totalCollection);
   ArrayProduct.push(currentValue,totalCollection,name);
   countProduct.innerHTML = '';
   for (let i = 1; i <= quantity; i++) {
@@ -231,13 +233,9 @@ addCart.addEventListener('click', function (e){
   }
   // count select option number
   countProduct.value = currentValue;
-
-
   countProduct.addEventListener('change', function() {
     let selectedValue = parseInt(this.value);
-    console.log(selectedValue);
     totlePrice.innerHTML = `$${selectedValue * newPrice}.00`;
-    // totlePrice.innerHTML = `$${ArrayProduct[1] * selectedValue }.00 ` ;
     numberOfProcduct.innerHTML = selectedValue;
   })
 
@@ -255,15 +253,6 @@ addCart.addEventListener('click', function (e){
     checkout.style.display = 'block';
     showProductSection.style.padding = '20px'
   }
-
-  // let namesToLocal = JSON.stringify(ArrayProduct[0])
-  // let totlePriceToLocal = JSON.stringify(ArrayProduct[1])
-  // let countProductToLocal = JSON.stringify(ArrayProduct[2])
-  // window.localStorage.setItem("names", namesToLocal);
-  // window.localStorage.setItem("totlePrice", totlePriceToLocal);
-  // window.localStorage.setItem("countProduct", countProductToLocal);
-
-
   checkout.addEventListener('click',function(e){
     let successfulRequest = [];
     successfulRequest.push(name,totlePrice.innerHTML,countProduct.value)
@@ -282,6 +271,36 @@ addCart.addEventListener('click', function (e){
     },800)
   })
 });
+/* 
+let countProductToLocal = JSON.stringify(ArrayProduct[0])
+let totlePriceToLocal = JSON.stringify(ArrayProduct[1])
+let namesToLocal= JSON.stringify(ArrayProduct[2])
+
+console.log(countProductToLocal);
+console.log(totlePriceToLocal);
+console.log(namesToLocal);
+
+// Set items in localStorage
+window.localStorage.setItem("countProduct", countProductToLocal);
+window.localStorage.setItem("totlePrice", totlePriceToLocal);
+window.localStorage.setItem("names", namesToLocal);
+
+// Get items from localStorage
+// let $cProduct = JSON.parse(window.localStorage.getItem('countProduct'));
+// let $tPrice = JSON.parse(window.localStorage.getItem('totlePrice'));
+// let $names = JSON.parse(window.localStorage.getItem('names'));
+
+console.log(localStorage.getItem('names'));
+
+if (localStorage.getItem('countProduct')) {
+    nameProduct.innerHTML = localStorage.getItem('names');
+    countProduct.value = localStorage.getItem('countProduct');
+    totlePrice.innerHTML = localStorage.getItem('totlePrice');
+  }else{
+    updateDisplay();
+  }
+*/
+
 function deleteItem (){
   let deleteProduct = document.querySelector('.delete');
   let currentValue = parseInt(addRemove.innerHTML);

@@ -154,7 +154,7 @@ nav .buy .cart span {
 
 .show-Product section {
   padding: 20px 20px;
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: space-between;
 }
@@ -203,7 +203,7 @@ nav .buy .cart span {
   color: black;
 }
 .emptySpan{
-  display: none;
+  display: block;
   padding: 69px 20px;
   margin: 0 auto;
 }
@@ -229,6 +229,7 @@ nav .buy .cart span {
 }
 
 .show-Product .Checkout {
+  display: none;
   padding: 20px 89px;
   margin: 30px 20px;
   margin-top: 0;
@@ -442,6 +443,7 @@ main .container {
 }
 
 main .container #overlay-imgs-Product {
+  Z-INDEX: 20;
   position: fixed;
   top: 0;
   left: 0;
