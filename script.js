@@ -48,6 +48,7 @@ const imgs = document.querySelectorAll('.imgs-Product img');
 const overlay = document.getElementById('overlay-imgs-Product');
 const mainImgContainer = document.getElementById('mainImgContainer');
 const underlayImgsContainer = document.getElementById('underlayImgsContainer');
+let imge = document.querySelector('.imge')
 
 let currentIndex = 0; 
 // Track the index of the currently displayed image
@@ -56,13 +57,10 @@ let currentIndex = 0;
 function displayImage(index) {
   const img = imgs[index];
   const imgSrc = img.src.split('-thumbnail').join('');
-  console.log(imgSrc);
-
   const imgAlt = img.alt;
-  console.log(img);
-  mainImgContainer.innerHTML = `<img src="${imgSrc}" alt="${imgAlt}">`; // Display the clicked image
+
+  imge.innerHTML = `<img src="${imgSrc}" alt="${imgAlt}">`; // Display the clicked image
   currentIndex = index;
-  
   // Show all other images underneath the clicked image
   underlayImgsContainer.innerHTML = ''; // Clear previous underlay images
   imgs.forEach((img, i) => {
@@ -81,10 +79,9 @@ function showOverlay() {
 }
 
 // Event listeners for each image
-imgs.forEach((img, index) => {
-  img.addEventListener('click', function() {
-    showOverlay(); // Show overlay when an image is clicked
-  });
+let masterImg = document.querySelector('#MasterImg img')
+masterImg.addEventListener('click', function() {
+  showOverlay(); // Show overlay when an image is clicked
 });
 
 // Previous button event listener
@@ -93,13 +90,31 @@ prevButton.addEventListener('click', function() {
   currentIndex = (currentIndex - 1 + imgs.length) % imgs.length; // Move to the previous image
   displayImage(currentIndex);
 });
-
 // Next button event listener
 const nextButton = document.getElementById('nextButton');
 nextButton.addEventListener('click', function() {
   currentIndex = (currentIndex + 1) % imgs.length; // Move to the next image
   displayImage(currentIndex);
 });
+
+
+
+
+const btnPrevMobile = document.getElementById('btn-prev');
+btnPrevMobile.addEventListener('click', function() {
+  // Move to the previous image
+  currentIndex = (currentIndex - 1 + imgs.length) % imgs.length;
+  displayImage(currentIndex);
+});
+const btnNextMobile = document.getElementById('btn-next');
+btnNextMobile.addEventListener('click', function() {
+  // Move to the next image
+  currentIndex = (currentIndex + 1) % imgs.length;
+  displayImage(currentIndex);
+});
+
+
+
 
 // Close button event listener
 const closeButton = document.getElementById('closeButton');
@@ -113,7 +128,7 @@ for (let i = 1; i <= 4; i++) {
   const mainImg = document.createElement('img');
   mainImg.src = `./images/image-product-${i}.jpg`;
   mainImg.alt = `Product ${i}`;
-  mainImgContainer.appendChild(mainImg);
+  imge.appendChild(mainImg);
 
   // Create thumbnail image element
   const thumbnailImg = document.createElement('img');
@@ -219,7 +234,7 @@ minus.addEventListener('click',function(e){
   updateDisplay();
   // price  span from element price
   nameProductInCar.innerHTML = name;
-  priceProduct.innerHTML = `$${newPrice}.00`;
+  priceProduct.innerHTML = `$${newPrice}.00  x`;
   let totalCollection = newPrice  *  currentValue; 
   totlePrice.innerHTML = `$${totalCollection}.00`;
   // console.log(totalCollection);

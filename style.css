@@ -258,6 +258,15 @@ nav .buy .avatar:hover img {
 
 /* Styles for burger menu in smaller screens */
 @media (max-width: 768px) {
+  .show-Product{
+    width: 324px;
+    top: calc(206% + 30px);
+    left: -163%;
+  }
+  .show-Product section .name-and-price .native-dropdown {
+    display: block;
+    width: fit-content;
+  }
   .burger-menu {
     margin: 0 11px;
     display: block;
@@ -408,6 +417,10 @@ main .container {
   width: 40%;
 }
 
+#MasterImg #btn-prev,
+#MasterImg #btn-next {
+  display: none;
+}
 #MasterImg img {
   border-radius: 15px;
   width: 100%;
@@ -423,19 +436,24 @@ main .container {
   justify-content: space-between;
   width: 100%;
   flex-wrap: wrap;
+  overflow: hidden;
+  position: relative;
+  
 }
 
-#underContainer img:first-child {
+#underContainer .carousel-item:first-child img{
   opacity: 0.3;
 }
 
-#underContainer img {
+.carousel-item img {
   height: 100px;
   border-radius: 15px;
-  margin: 5px;
   border: 2px solid transparent;
   transition: border-color 0.3s;
+  width: 100%;
+  object-fit: cover;
 }
+
 
 #underContainer img:hover {
   border-color: hsl(26, 100%, 55%);
@@ -474,7 +492,8 @@ main .container #overlay-imgs-Product {
   filter: invert(28%) sepia(31%) saturate(5768%) hue-rotate(229deg)
     brightness(265%) contrast(127%);
 }
-
+#btn-prev,
+#btn-next,
 #prevButton,
 #nextButton {
   position: absolute;
@@ -488,23 +507,28 @@ main .container #overlay-imgs-Product {
   background-repeat: no-repeat;
   background-position: center;
   background-size: auto;
-  transition: border 0.3s background-color;
   cursor: pointer;
+  transition: border 0.3s ;
+  -webkit-transition: border 0.3s ;
+  -moz-transition: border 0.3s ;
+  -ms-transition: border 0.3s ;
+  -o-transition: border 0.3s ;
 }
-
+#btn-prev,
+#btn-next,
 #prevButton:hover,
 #nextButton:hover {
   border: 2px solid hsl(26, 100%, 55%);
   background-color: hsl(25, 100%, 94%);
 }
-
+#btn-prev,
 #prevButton {
   background-image: url(./images/icon-previous.svg);
 }
-
+#btn-next,
 #nextButton {
   background-image: url(./images/icon-next.svg);
-  right: 0;
+  right: -45px;
 }
 
 .modal-content img {
@@ -512,6 +536,7 @@ main .container #overlay-imgs-Product {
 }
 
 #mainImgContainer {
+  position: relative;
   text-align: center;
   margin-bottom: 20px;
   display: flex;
@@ -635,8 +660,22 @@ main .container #overlay-imgs-Product {
     padding-left: 0;
     padding-right: 0;
   }
-
+  #MasterImg {
+    margin-bottom: 40px;
+    position: relative;
+  }
+  #MasterImg #btn-prev,
+  #MasterImg #btn-next {
+    display: block;
+  }
+  #MasterImg #btn-prev {
+    left: 35px;
+  }
+  #MasterImg #btn-next {
+    right: 0;
+  }
   #MasterImg img {
+    margin:0;
     border-radius: 0;
   }
 
