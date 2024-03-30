@@ -1,47 +1,47 @@
-  const burgerMenu = document.querySelector('.burger-menu');
-  const menuLinks = document.querySelector('.menu-links');
-  const overlayMenu = document.getElementById("overlay");
-  const closeButtonMenu = document.querySelector('.close');
+const burgerMenu = document.querySelector('.burger-menu');
+const menuLinks = document.querySelector('.menu-links');
+const overlayMenu = document.getElementById("overlay");
+const closeButtonMenu = document.querySelector('.close');
 
-  burgerMenu.addEventListener('click', function() {
-    menuLinks.classList.toggle('open');
-    burgerMenu.classList.toggle('open');
+burgerMenu.addEventListener('click', function() {
+  menuLinks.classList.toggle('open');
+  burgerMenu.classList.toggle('open');
 
-    const isMenuOpen = menuLinks.classList.contains("open");
-    overlayMenu.style.opacity = isMenuOpen ? "1" : "0";
-    overlayMenu.style.visibility = isMenuOpen ? "visible" : "hidden";
-    overlayMenu.style.pointerEvents = isMenuOpen ? "auto" : "none";
+  const isMenuOpen = menuLinks.classList.contains("open");
+  overlayMenu.style.opacity = isMenuOpen ? "1" : "0";
+  overlayMenu.style.visibility = isMenuOpen ? "visible" : "hidden";
+  overlayMenu.style.pointerEvents = isMenuOpen ? "auto" : "none";
 
-    menuLinks.setAttribute("aria-expanded", isMenuOpen.toString());
-    closeButtonMenu.setAttribute("aria-expanded", isMenuOpen.toString());
-  });
+  menuLinks.setAttribute("aria-expanded", isMenuOpen.toString());
+  closeButtonMenu.setAttribute("aria-expanded", isMenuOpen.toString());
+});
 
-  document.querySelector('.close').addEventListener('click', function () {
-    menuLinks.classList.remove("open");
-    burgerMenu.classList.remove("open");
+document.querySelector('.close').addEventListener('click', function () {
+  menuLinks.classList.remove("open");
+  burgerMenu.classList.remove("open");
 
-    overlayMenu.style.opacity = "0";
-    overlayMenu.style.visibility = "hidden";
-    overlayMenu.style.pointerEvents = "none";
-    menuLinks.setAttribute("aria-expanded", "false");
-    closeButtonMenu.setAttribute("aria-expanded", "false");
-  });
+  overlayMenu.style.opacity = "0";
+  overlayMenu.style.visibility = "hidden";
+  overlayMenu.style.pointerEvents = "none";
+  menuLinks.setAttribute("aria-expanded", "false");
+  closeButtonMenu.setAttribute("aria-expanded", "false");
+});
 
-  overlayMenu.addEventListener('click', function() {
-    menuLinks.classList.remove("open");
-    burgerMenu.classList.remove("open");
+overlayMenu.addEventListener('click', function() {
+  menuLinks.classList.remove("open");
+  burgerMenu.classList.remove("open");
 
-    overlayMenu.style.opacity = "0";
-    overlayMenu.style.visibility = "hidden";
-    overlayMenu.style.pointerEvents = "none";
-    menuLinks.setAttribute("aria-expanded", "false");
-    closeButtonMenu.setAttribute("aria-expanded", "false");
-  });
-
-
+  overlayMenu.style.opacity = "0";
+  overlayMenu.style.visibility = "hidden";
+  overlayMenu.style.pointerEvents = "none";
+  menuLinks.setAttribute("aria-expanded", "false");
+  closeButtonMenu.setAttribute("aria-expanded", "false");
+});
 
 
-  
+
+
+
 // Start Product 
 // Products imges 
 const imgs = document.querySelectorAll('.imgs-Product img');
@@ -55,62 +55,61 @@ let currentIndex = 0;
 
 // Function to display the image at the specified index
 function displayImage(index) {
-  const img = imgs[index];
-  const imgSrc = img.src.split('-thumbnail').join('');
-  console.log(imgSrc);
+const img = imgs[index];
+const imgSrc = img.src.split('-thumbnail').join('');
+console.log(imgSrc);
 
-  const imgAlt = img.alt;
-  console.log(img);
-  mainImgContainer.innerHTML = `<img src="${imgSrc}" alt="${imgAlt}">`; // Display the clicked image
-  currentIndex = index;
-  
-  // Show all other images underneath the clicked image
-  underlayImgsContainer.innerHTML = ''; // Clear previous underlay images
-  imgs.forEach((img, i) => {
-    if (i !== index) {
-      const imgClone = img.cloneNode(true); // Create a clone of the image
-      imgClone.classList.add('underlay-img'); // Add a class to differentiate underlay images
-      underlayImgsContainer.appendChild(imgClone); // Append the cloned image to the underlay images container
-    }
-  });
+const imgAlt = img.alt;
+console.log(img);
+mainImgContainer.innerHTML = `<img src="${imgSrc}" alt="${imgAlt}">`; // Display the clicked image
+currentIndex = index;
+
+// Show all other images underneath the clicked image
+underlayImgsContainer.innerHTML = ''; // Clear previous underlay images
+imgs.forEach((img, i) => {
+  if (i !== index) {
+    const imgClone = img.cloneNode(true); // Create a clone of the image
+    imgClone.classList.add('underlay-img'); // Add a class to differentiate underlay images
+    underlayImgsContainer.appendChild(imgClone); // Append the cloned image to the underlay images container
+  }
+});
 }
 
 // Function to show the overlay and display the first image
 function showOverlay() {
-  overlay.style.display = 'flex'; // Display the overlay
-  displayImage(0); // Display the first image
+overlay.style.display = 'flex'; // Display the overlay
+displayImage(0); // Display the first image
 }
 
 
 // Event listeners for each image
-<<<<<<< Updated upstream
+
 imgs.forEach((img, index) => {
-  img.addEventListener('click', function() {
-    showOverlay(); // Show overlay when an image is clicked
-  });
-=======
+img.addEventListener('click', function() {
+  showOverlay(); // Show overlay when an image is clicked
+});
+})
+
 let masterImg = document.querySelector('#MasterImg .shoes')
 masterImg.addEventListener('click', function() {
-  showOverlay(); // Show overlay when an image is clicked
->>>>>>> Stashed changes
+showOverlay(); // Show overlay when an image is clicked
+
 });
 
 // Previous button event listener
 const prevButton = document.querySelector('.prevButton');
 prevButton.addEventListener('click', function() {
-  currentIndex = (currentIndex - 1 + imgs.length) % imgs.length; // Move to the previous image
-  displayImage(currentIndex);
+currentIndex = (currentIndex - 1 + imgs.length) % imgs.length; // Move to the previous image
+displayImage(currentIndex);
 });
 
 // Next button event listener
 const nextButton = document.querySelector('.nextButton');
 nextButton.addEventListener('click', function() {
-  currentIndex = (currentIndex + 1) % imgs.length; // Move to the next image
-  displayImage(currentIndex);
+currentIndex = (currentIndex + 1) % imgs.length; // Move to the next image
+displayImage(currentIndex);
 });
 
-<<<<<<< Updated upstream
-=======
 
 
 
@@ -130,26 +129,26 @@ nextButton.addEventListener('click', function() {
 
 
 
->>>>>>> Stashed changes
+
 // Close button event listener
 const closeButton = document.getElementById('closeButton');
 closeButton.addEventListener('click', function() {
-  overlay.style.display = 'none'; // Hide the overlay
+overlay.style.display = 'none'; // Hide the overlay
 });
-  
+
 // Add the images dynamically
 for (let i = 1; i <= 4; i++) {
-  // Create main image element
-  const mainImg = document.createElement('img');
-  mainImg.src = `./images/image-product-${i}.jpg`;
-  mainImg.alt = `Product ${i}`;
-  mainImgContainer.appendChild(mainImg);
+// Create main image element
+const mainImg = document.createElement('img');
+mainImg.src = `./images/image-product-${i}.jpg`;
+mainImg.alt = `Product ${i}`;
+mainImgContainer.appendChild(mainImg);
 
-  // Create thumbnail image element
-  const thumbnailImg = document.createElement('img');
-  thumbnailImg.src = `./images/image-product-${i}-thumbnail.jpg`;
-  thumbnailImg.alt = `Product ${i} Thumbnail`;
-  underlayImgsContainer.appendChild(thumbnailImg);
+// Create thumbnail image element
+const thumbnailImg = document.createElement('img');
+thumbnailImg.src = `./images/image-product-${i}-thumbnail.jpg`;
+thumbnailImg.alt = `Product ${i} Thumbnail`;
+underlayImgsContainer.appendChild(thumbnailImg);
 }
 
 
@@ -191,173 +190,173 @@ let emptySpan = document.querySelector('.emptySpan')
 
 
 function updateDisplay() {
-  if (numberOfProcduct.innerHTML === '0' || numberOfProcduct.textContent === '') {
-    numberOfProcduct.style.display = 'none';
-    showProductSection.style.display = 'none';
-    emptySpan.style.display = 'block';
-    checkout.style.display = 'none';
-  } else {
-    numberOfProcduct.style.display = 'flex';
-    showProductSection.style.display = 'flex';
-    emptySpan.style.display = 'none';
-    checkout.style.display = 'block';
-  }
+if (numberOfProcduct.innerHTML === '0' || numberOfProcduct.textContent === '') {
+  numberOfProcduct.style.display = 'none';
+  showProductSection.style.display = 'none';
+  emptySpan.style.display = 'block';
+  checkout.style.display = 'none';
+} else {
+  numberOfProcduct.style.display = 'flex';
+  showProductSection.style.display = 'flex';
+  emptySpan.style.display = 'none';
+  checkout.style.display = 'block';
+}
 }
 // updateDisplay() 
 
 cart.addEventListener('click', function() {
-  showProduct.style.display = 'flex';
+showProduct.style.display = 'flex';
 });
 document.addEventListener('click', function(event) {
-  const target = event.target;
-  if (!showProduct.contains(target) && target !== cart) {
-      showProduct.style.display = 'none';
-  }
+const target = event.target;
+if (!showProduct.contains(target) && target !== cart) {
+    showProduct.style.display = 'none';
+}
 });
 
 plus.addEventListener('click',function(e){
-    let currentValue = parseInt(addRemove.innerHTML);
-    
-    let incressingValue = currentValue + 1;
-    if(addRemove.innerHTML < quantity){
-      addRemove.innerHTML = incressingValue;
-    }else{
-      console.log("Maximum value reached!");
-    }
-  });
+  let currentValue = parseInt(addRemove.innerHTML);
+  
+  let incressingValue = currentValue + 1;
+  if(addRemove.innerHTML < quantity){
+    addRemove.innerHTML = incressingValue;
+  }else{
+    console.log("Maximum value reached!");
+  }
+});
 
 minus.addEventListener('click',function(e){
-  let currentValue = parseInt(addRemove.innerHTML);
-  let decreasingValue = currentValue - 1;
-  if(addRemove.innerHTML > 0){
-    addRemove.innerHTML = decreasingValue;
-  }else{
-    console.log("min value reached!");
-  }
+let currentValue = parseInt(addRemove.innerHTML);
+let decreasingValue = currentValue - 1;
+if(addRemove.innerHTML > 0){
+  addRemove.innerHTML = decreasingValue;
+}else{
+  console.log("min value reached!");
+}
 })
 
 // preice item
 let newPrice = parseInt(price.innerHTML.replace(/[^0-9.]/g, ""));
 addCart.addEventListener('click', function (){
-  let ArrayProduct = [];
-  let quantity = 15;
-  // get value number from span product
-  let currentValue = parseInt(addRemove.innerHTML);
-  let name = nameProduct.innerHTML;
-  // price  span from element price
-  nameProductInCar.innerHTML = name;
-<<<<<<< Updated upstream
-  priceProduct.innerHTML = `$${newPrice}.00`;
-  let totalCollection = newPrice  *  currentValue; 
-=======
+let ArrayProduct = [];
+let quantity = 15;
+// get value number from span product
+let currentValue = parseInt(addRemove.innerHTML);
+let name = nameProduct.innerHTML;
+// price  span from element price
+nameProductInCar.innerHTML = name;
 
-  let totalQuantity;
-  let existingValue = parseInt(numberOfProcduct.textContent);
-  
-  // let totalCollection = newPrice * currentValue; 
-  if (!isNaN(existingValue)) {
-    totalQuantity = existingValue + currentValue;
-    if (totalQuantity > quantity) {
-      numberOfProcduct.textContent = quantity;
-    } else {
-      numberOfProcduct.textContent = totalQuantity;
-    }
+priceProduct.innerHTML = `$${newPrice}.00`;
+// let totalCollection = newPrice  *  currentValue; 
+
+
+let totalQuantity;
+let existingValue = parseInt(numberOfProcduct.textContent);
+
+// let totalCollection = newPrice * currentValue; 
+if (!isNaN(existingValue)) {
+  totalQuantity = existingValue + currentValue;
+  if (totalQuantity > quantity) {
+    numberOfProcduct.textContent = quantity;
   } else {
-    numberOfProcduct.textContent = currentValue;
+    numberOfProcduct.textContent = totalQuantity;
   }
-  let totalCollection = newPrice * parseInt(numberOfProcduct.textContent);
->>>>>>> Stashed changes
-  totlePrice.innerHTML = `$${totalCollection}.00`;
-  
+} else {
+  numberOfProcduct.textContent = currentValue;
+}
+let totalCollection = newPrice * parseInt(numberOfProcduct.textContent);
 
-  
-  // reset the array
-  function resetCart() {
-    ArrayProduct = []; 
-    numberOfProcduct.textContent = '0'; 
-    totlePrice.textContent = '$0.00'; 
-  }
+totlePrice.innerHTML = `$${totalCollection}.00`;
 
-  updateDisplay();
-  priceProduct.innerHTML = `$${newPrice}.00  x`;
-  ArrayProduct.push(currentValue,totalCollection,name);
-  countProduct.innerHTML = '';
-  for (let i = 1; i <= quantity; i++) {
-    let option = document.createElement('option');
-    option.value = i;
-    option.textContent = i;
-    countProduct.appendChild(option);
-  }
 
-  countProduct.value =  numberOfProcduct.textContent;
-  countProduct.addEventListener('change', function() {
-    let selectedValue = parseInt(this.value);
-    totlePrice.innerHTML = `$${selectedValue * newPrice}.00`;
-    numberOfProcduct.innerHTML = selectedValue;
-  })
 
-  let deleteProduct = document.querySelector('.delete');
-  let currentCount = parseInt(countProduct.value);
-  // display again all items
+// reset the array
+function resetCart() {
+  ArrayProduct = []; 
+  numberOfProcduct.textContent = '0'; 
+  totlePrice.textContent = '$0.00'; 
+}
+
+updateDisplay();
+priceProduct.innerHTML = `$${newPrice}.00  x`;
+ArrayProduct.push(currentValue,totalCollection,name);
+countProduct.innerHTML = '';
+for (let i = 1; i <= quantity; i++) {
+  let option = document.createElement('option');
+  option.value = i;
+  option.textContent = i;
+  countProduct.appendChild(option);
+}
+
+countProduct.value =  numberOfProcduct.textContent;
+countProduct.addEventListener('change', function() {
+  let selectedValue = parseInt(this.value);
+  totlePrice.innerHTML = `$${selectedValue * newPrice}.00`;
+  numberOfProcduct.innerHTML = selectedValue;
+})
+
+let deleteProduct = document.querySelector('.delete');
+let currentCount = parseInt(countProduct.value);
+// display again all items
+if(currentCount >= 0){
+  emptySpan.style.display = 'none';
+  showProductSection.style.display = 'flex';
+  checkout.style.display = 'block';
+  // container of prodcut 
+  nameAndPrice.style.display = 'block';
+  deleteProduct.style.display = 'block';
+  imagSection.style.display = 'block';
+  checkout.style.display = 'block';
+  showProductSection.style.padding = '20px'
+}
+checkout.addEventListener('click',function(e){
+  resetCart()
+  let successfulRequest = [];
+  successfulRequest.push(name,totlePrice.innerHTML,countProduct.value)
+  nameAndPrice.style.display = 'none';
+  deleteProduct.style.display = 'none';
+  imagSection.style.display = 'none';
+  checkout.style.display = 'none';
+  showProductSection.style.padding = '0'
+
+  let congratulations = document.querySelector('.congratulations')
+  congratulations.style.display = 'block';
+  setTimeout( s=>{
+    numberOfProcduct.style.display = 'none';
+    congratulations.style.display = 'none';
+    emptySpan.style.display = 'block';
+  },800)
+})
+});
+
+
+function deleteItem (){
+let deleteProduct = document.querySelector('.delete');
+let currentValue = parseInt(addRemove.innerHTML);
+deleteProduct.addEventListener('click',function(){
+let selectIndex = countProduct.selectedIndex
+let currentCount = parseInt(countProduct.value);
+if (selectIndex !== -1) {
   if(currentCount >= 0){
-    emptySpan.style.display = 'none';
-    showProductSection.style.display = 'flex';
-    checkout.style.display = 'block';
-    // container of prodcut 
-    nameAndPrice.style.display = 'block';
-    deleteProduct.style.display = 'block';
-    imagSection.style.display = 'block';
-    checkout.style.display = 'block';
-    showProductSection.style.padding = '20px'
+    currentCount--;
+    // remove product in span cart 
+    numberOfProcduct.innerHTML = selectIndex;
+    // remove one value on counter select option 
+    countProduct.value =  currentCount
+    // remove product of totle price
+    const totalPrice = currentCount * newPrice; 
+    totlePrice.innerHTML = `$${totalPrice}.00`;
   }
-  checkout.addEventListener('click',function(e){
-    resetCart()
-    let successfulRequest = [];
-    successfulRequest.push(name,totlePrice.innerHTML,countProduct.value)
+  if (currentCount === 0) {
+    // select.remove(selectIndex);
+    emptySpan.style.display = 'block';
     nameAndPrice.style.display = 'none';
     deleteProduct.style.display = 'none';
     imagSection.style.display = 'none';
     checkout.style.display = 'none';
     showProductSection.style.padding = '0'
-
-    let congratulations = document.querySelector('.congratulations')
-    congratulations.style.display = 'block';
-    setTimeout( s=>{
-      numberOfProcduct.style.display = 'none';
-      congratulations.style.display = 'none';
-      emptySpan.style.display = 'block';
-    },800)
-  })
-});
-
-
-function deleteItem (){
-  let deleteProduct = document.querySelector('.delete');
-  let currentValue = parseInt(addRemove.innerHTML);
-  deleteProduct.addEventListener('click',function(){
-  let selectIndex = countProduct.selectedIndex
-  let currentCount = parseInt(countProduct.value);
-  if (selectIndex !== -1) {
-    if(currentCount >= 0){
-      currentCount--;
-      // remove product in span cart 
-      numberOfProcduct.innerHTML = selectIndex;
-      // remove one value on counter select option 
-      countProduct.value =  currentCount
-      // remove product of totle price
-      const totalPrice = currentCount * newPrice; 
-      totlePrice.innerHTML = `$${totalPrice}.00`;
-    }
-    if (currentCount === 0) {
-      // select.remove(selectIndex);
-      emptySpan.style.display = 'block';
-      nameAndPrice.style.display = 'none';
-      deleteProduct.style.display = 'none';
-      imagSection.style.display = 'none';
-      checkout.style.display = 'none';
-      showProductSection.style.padding = '0'
-    }
   }
-  })
+}
+})
 }
 deleteItem()

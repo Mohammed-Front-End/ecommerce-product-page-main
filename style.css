@@ -28,15 +28,13 @@ body {
 header {
   border-bottom: 2px solid hsl(223, 64%, 98%);
   height: 115px;
-  padding:0px 7.3rem;
 }
 
 nav {
   display: flex;
-  flex-wrap: wrap;
   width: 100%;
   align-items: center;
-  justify-content: flex-start;
+  flex-wrap: wrap;
 }
 
 .burger-menu {
@@ -49,26 +47,35 @@ nav {
 }
 
 nav .logo {
-  padding: 2.8rem 2rem;
+  display: flex;
+  margin: 0px 8px;
+  align-items: center;
+  justify-content: center;
+  flex-basis: 15%;
 }
-
+nav .logo a img{
+  display: flex;
+  width: 145px;
+  flex-wrap: wrap;
+  padding: 2.7rem 0rem;
+}
 nav ul {
   display: flex;
-  flex: 1;
-  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  flex-basis: 60%;
 }
 
 nav ul li {
   position: relative;
   display: flex;
   align-items: center;
-  flex-basis: 100%;
+  min-width: 80px;
   justify-content: center;
 }
 
 nav ul li a {
   color: hsl(219, 9%, 45%);
-  font-size: 1.2rem;
   position: relative;
   transition: color 0.4s;
   padding: 2.8rem 0.5rem;
@@ -96,11 +103,11 @@ nav ul li:hover a::before {
 
 nav .buy {
   display: flex;
-  max-height: 100%;
-  flex: 1;
+  flex-basis: 15%;
+  /* flex: 1; */
   align-items: center;
-  justify-content: flex-end;
-  gap: 2rem;
+  justify-content: center;
+  gap: 1rem;
 }
 
 .continer-Cart {
@@ -261,9 +268,7 @@ nav .buy .avatar:hover img {
 
 /* Styles for burger menu in smaller screens */
 @media (max-width: 768px) {
-<<<<<<< Updated upstream
-=======
-  .show-Product{
+    .show-Product{
     width: 370px;
     top: calc(206% + 30px);
     left: -163%;
@@ -273,7 +278,7 @@ nav .buy .avatar:hover img {
     display: block;
     width: fit-content;
   }
->>>>>>> Stashed changes
+
   .burger-menu {
     margin: 0 11px;
     display: block;
@@ -298,66 +303,59 @@ nav #overlay {
 /* Media query for mobile devices */
 
 @media (max-width: 768px) {
-  /* Hide menu links by default */
-  header {
-    padding: 0;
-  }
+.menu-links {
+  position: fixed;
+  top: 0;
+  left: -100%;
+  width: 65%;
+  height: 100%;
+  background-color: hsl(223, 64%, 98%);
+  z-index: 998;
+  flex-direction: column;
+  align-items: flex-start;
+  transition: left 0.3s;
+}
+.menu-links.open {
+  display: flex;
+  left: 0;
+}
+.menu-links .close {
+  display: block;
+  font-size: 33px;
+  margin: 21px;
+  margin-left: 2rem;
+  width: 3rem;
+  height: 2rem;
+  cursor: pointer;
+  font-family: "KumbhSans";
+  background-color: transparent;
+  background-image: url(./images/icon-close.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  border: none;
+  text-align: left;
+}
+nav #overlay {
+  position: fixed;
+  display: block;
+  width: 35%;
+  height: 100%;
+  right: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.3s, visibility 0.3s;
+}
+  nav .buy{
+    flex: 1;
+    flex-basis: 0%;
+    justify-content: flex-end;
 
-  .menu-links {
-    position: fixed;
-    top: 0;
-    left: -100%;
-    width: 65%;
-    height: 100%;
-    background-color: hsl(223, 64%, 98%);
-    z-index: 998;
-    flex-direction: column;
-    align-items: flex-start;
-    transition: left 0.3s;
   }
-
-  nav .logo {
-    padding: 2.3rem 0;
-  }
-
-  .menu-links.open {
-    display: flex;
-    left: 0;
-  }
-
-  .menu-links .close {
-    display: block;
-    font-size: 33px;
-    margin: 21px;
-    margin-left: 2rem;
-    width: 3rem;
-    height: 2rem;
-    cursor: pointer;
-    font-family: "KumbhSans";
-    background-color: transparent;
-    background-image: url(./images/icon-close.svg);
-    background-repeat: no-repeat;
-    background-size: contain;
-    border: none;
-    text-align: left;
-  }
-
-  nav #overlay {
-    position: fixed;
-    display: block;
-    width: 35%;
-    height: 100%;
-    right: 0;
-    top: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 2;
-    cursor: pointer;
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transition: opacity 0.3s, visibility 0.3s;
-  }
-
   .menu-links .avatar {
     display: block;
     font-size: 33px;
@@ -365,29 +363,20 @@ nav #overlay {
     padding: 17px 40px;
     cursor: pointer;
   }
-
   nav ul li {
     flex-basis: 0%;
     padding-left: 2.3rem;
   }
-
-  nav ul li a {
-    padding: 2.3rem 0;
-  }
-
-  /* Show menu links when burger menu icon is clicked */
   #burger-checkbox:checked + .burger-menu + .menu-links {
     display: block;
     left: 0%;
   }
-
   .menu-links ul {
     display: block;
     text-align: center;
     padding-top: 100px;
     /* Adjust as needed */
   }
-
   .menu-links ul li {
     display: block;
     margin-bottom: 20px;
@@ -397,13 +386,6 @@ nav #overlay {
 @media screen and (min-width: 769px) and (max-width: 992px) {
   .menu-links li a {
     font-size: 1rem !important;
-  }
-
-  header {
-    padding: 0px 1.3rem;
-  }
-  nav .logo {
-    padding: 2.8rem 0px;
   }
 }
 
@@ -426,10 +408,6 @@ main .container {
   justify-content: space-between;
   width: 40%;
 }
-
-<<<<<<< Updated upstream
-#MasterImg img {
-=======
 #MasterImg {
   position: relative;
 }
@@ -440,7 +418,6 @@ main .container {
   justify-content: center;
 }
 #MasterImg .shoes {
->>>>>>> Stashed changes
   border-radius: 15px;
   width: 100%;
   margin-bottom: 40px;
@@ -464,7 +441,6 @@ main .container {
 #underContainer img {
   height: 100px;
   border-radius: 15px;
-  margin: 5px;
   border: 2px solid transparent;
   transition: border-color 0.3s;
 }
@@ -503,46 +479,33 @@ main .container #overlay-imgs-Product {
   filter: invert(28%) sepia(31%) saturate(5768%) hue-rotate(229deg)
     brightness(265%) contrast(127%);
 }
-<<<<<<< Updated upstream
 
-#prevButton,
-#nextButton {
-=======
+
 #btn-prev,
 #btn-next,
 .prevButton,
 .nextButton {
->>>>>>> Stashed changes
   position: absolute;
   top: 50%;
-  border: none;
+  border: transparent;
   transform: translate(-50%, -50%);
   width: 45px;
   height: 45px;
   border-radius: 50%;
-<<<<<<< Updated upstream
-  background-image: url(./images/icon-close.svg);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: auto;
-  transition: border 0.3s background-color;
+  border-width: 2px;
   cursor: pointer;
+  background-size: auto;
+  transition: border 0.3s linear;
 }
-
 #prevButton:hover,
 #nextButton:hover {
   border: 2px solid hsl(26, 100%, 55%);
-  background-color: hsl(25, 100%, 94%);
+  background-color: hsl(0, 0%, 100%);
 }
 
-#prevButton {
-  background-image: url(./images/icon-previous.svg);
-}
 
 #nextButton {
-  background-image: url(./images/icon-next.svg);
   right: 0;
-=======
   cursor: pointer;
   border: transparent;
   transition: border 0.3s linear;
@@ -557,47 +520,8 @@ main .container #overlay-imgs-Product {
 #btn-next,
 .nextButton {
   right: -45px;
->>>>>>> Stashed changes
+
 }
-
-/* 
-.prevButton,
-.nextButton {
-  position: absolute;
-  top: 50%;
-  border: none;
-  transform: translate(-50%, -50%);
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
-  cursor: pointer;
-  border: transparent;
-  transition: border 0.3s linear;
-}
-.prevButton:hover,
-.nextButton:hover {
-  border: 2px solid hsl(26, 100%, 55%);
-  background-color: hsl(25, 100%, 94%);
-}
-.prevButton {
-  left: 0;
-}
-
-.nextButton {
-  right: -45px;
-}
-*/
-
-
-
-
-
-
-
-
-
-
-
 
 .modal-content img {
   margin: 0 auto;
@@ -727,9 +651,6 @@ main .container #overlay-imgs-Product {
     padding-left: 0;
     padding-right: 0;
   }
-<<<<<<< Updated upstream
-
-=======
   #MasterImg {
     margin-bottom: 40px;
   }
@@ -743,8 +664,8 @@ main .container #overlay-imgs-Product {
   #MasterImg #btn-next {
     right: 0;
   }
->>>>>>> Stashed changes
-  #MasterImg img {
+
+  #MasterImg .shoes {
     border-radius: 0;
   }
 
@@ -808,6 +729,7 @@ main .container #overlay-imgs-Product {
 }
 
 @media screen and (min-width: 768px) and (max-width: 992px) {
+
   .imgs-Product {
     width: 48%;
   }
