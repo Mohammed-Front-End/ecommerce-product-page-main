@@ -46,6 +46,7 @@
 // Products imges 
 const imgs = document.querySelectorAll('.imgs-Product img');
 const overlay = document.getElementById('overlay-imgs-Product');
+// const shoes = document.querySelector('.shoes')
 const mainImgContainer = document.getElementById('mainImgContainer');
 const underlayImgsContainer = document.getElementById('underlayImgsContainer');
 
@@ -80,27 +81,56 @@ function showOverlay() {
   displayImage(0); // Display the first image
 }
 
+
 // Event listeners for each image
+<<<<<<< Updated upstream
 imgs.forEach((img, index) => {
   img.addEventListener('click', function() {
     showOverlay(); // Show overlay when an image is clicked
   });
+=======
+let masterImg = document.querySelector('#MasterImg .shoes')
+masterImg.addEventListener('click', function() {
+  showOverlay(); // Show overlay when an image is clicked
+>>>>>>> Stashed changes
 });
 
 // Previous button event listener
-const prevButton = document.getElementById('prevButton');
+const prevButton = document.querySelector('.prevButton');
 prevButton.addEventListener('click', function() {
   currentIndex = (currentIndex - 1 + imgs.length) % imgs.length; // Move to the previous image
   displayImage(currentIndex);
 });
 
 // Next button event listener
-const nextButton = document.getElementById('nextButton');
+const nextButton = document.querySelector('.nextButton');
 nextButton.addEventListener('click', function() {
   currentIndex = (currentIndex + 1) % imgs.length; // Move to the next image
   displayImage(currentIndex);
 });
 
+<<<<<<< Updated upstream
+=======
+
+
+
+// const btnPrevMobile = document.getElementById('btn-prev');
+// btnPrevMobile.addEventListener('click', function() {
+//   // Move to the previous image
+//   currentIndex = (currentIndex - 1 + imgs.length) % imgs.length;
+//   displayImage(currentIndex);
+// });
+// const btnNextMobile = document.getElementById('btn-next');
+// btnNextMobile.addEventListener('click', function() {
+//   // Move to the next image
+//   currentIndex = (currentIndex + 1) % imgs.length;
+//   displayImage(currentIndex);
+// });
+
+
+
+
+>>>>>>> Stashed changes
 // Close button event listener
 const closeButton = document.getElementById('closeButton');
 closeButton.addEventListener('click', function() {
@@ -121,6 +151,7 @@ for (let i = 1; i <= 4; i++) {
   thumbnailImg.alt = `Product ${i} Thumbnail`;
   underlayImgsContainer.appendChild(thumbnailImg);
 }
+
 
 
 
@@ -205,24 +236,50 @@ minus.addEventListener('click',function(e){
   }
 })
 
-  // preice item
-  let newPrice = parseInt(price.innerHTML.replace(/[^0-9.]/g, ""));
-  addCart.addEventListener('click', function (e){
+// preice item
+let newPrice = parseInt(price.innerHTML.replace(/[^0-9.]/g, ""));
+addCart.addEventListener('click', function (){
   let ArrayProduct = [];
-  // console.log(ArrayProduct);
   let quantity = 15;
   // get value number from span product
   let currentValue = parseInt(addRemove.innerHTML);
   let name = nameProduct.innerHTML;
-  // count of basket
-  numberOfProcduct.innerHTML = currentValue;
-  updateDisplay();
   // price  span from element price
   nameProductInCar.innerHTML = name;
+<<<<<<< Updated upstream
   priceProduct.innerHTML = `$${newPrice}.00`;
   let totalCollection = newPrice  *  currentValue; 
+=======
+
+  let totalQuantity;
+  let existingValue = parseInt(numberOfProcduct.textContent);
+  
+  // let totalCollection = newPrice * currentValue; 
+  if (!isNaN(existingValue)) {
+    totalQuantity = existingValue + currentValue;
+    if (totalQuantity > quantity) {
+      numberOfProcduct.textContent = quantity;
+    } else {
+      numberOfProcduct.textContent = totalQuantity;
+    }
+  } else {
+    numberOfProcduct.textContent = currentValue;
+  }
+  let totalCollection = newPrice * parseInt(numberOfProcduct.textContent);
+>>>>>>> Stashed changes
   totlePrice.innerHTML = `$${totalCollection}.00`;
-  // console.log(totalCollection);
+  
+
+  
+  // reset the array
+  function resetCart() {
+    ArrayProduct = []; 
+    numberOfProcduct.textContent = '0'; 
+    totlePrice.textContent = '$0.00'; 
+  }
+
+  updateDisplay();
+  priceProduct.innerHTML = `$${newPrice}.00  x`;
   ArrayProduct.push(currentValue,totalCollection,name);
   countProduct.innerHTML = '';
   for (let i = 1; i <= quantity; i++) {
@@ -231,8 +288,8 @@ minus.addEventListener('click',function(e){
     option.textContent = i;
     countProduct.appendChild(option);
   }
-  // count select option number
-  countProduct.value = currentValue;
+
+  countProduct.value =  numberOfProcduct.textContent;
   countProduct.addEventListener('change', function() {
     let selectedValue = parseInt(this.value);
     totlePrice.innerHTML = `$${selectedValue * newPrice}.00`;
@@ -254,6 +311,7 @@ minus.addEventListener('click',function(e){
     showProductSection.style.padding = '20px'
   }
   checkout.addEventListener('click',function(e){
+    resetCart()
     let successfulRequest = [];
     successfulRequest.push(name,totlePrice.innerHTML,countProduct.value)
     nameAndPrice.style.display = 'none';
@@ -271,35 +329,7 @@ minus.addEventListener('click',function(e){
     },800)
   })
 });
-/* 
-let countProductToLocal = JSON.stringify(ArrayProduct[0])
-let totlePriceToLocal = JSON.stringify(ArrayProduct[1])
-let namesToLocal= JSON.stringify(ArrayProduct[2])
 
-console.log(countProductToLocal);
-console.log(totlePriceToLocal);
-console.log(namesToLocal);
-
-// Set items in localStorage
-window.localStorage.setItem("countProduct", countProductToLocal);
-window.localStorage.setItem("totlePrice", totlePriceToLocal);
-window.localStorage.setItem("names", namesToLocal);
-
-// Get items from localStorage
-// let $cProduct = JSON.parse(window.localStorage.getItem('countProduct'));
-// let $tPrice = JSON.parse(window.localStorage.getItem('totlePrice'));
-// let $names = JSON.parse(window.localStorage.getItem('names'));
-
-console.log(localStorage.getItem('names'));
-
-if (localStorage.getItem('countProduct')) {
-    nameProduct.innerHTML = localStorage.getItem('names');
-    countProduct.value = localStorage.getItem('countProduct');
-    totlePrice.innerHTML = localStorage.getItem('totlePrice');
-  }else{
-    updateDisplay();
-  }
-*/
 
 function deleteItem (){
   let deleteProduct = document.querySelector('.delete');

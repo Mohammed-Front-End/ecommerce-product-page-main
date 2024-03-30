@@ -28,7 +28,7 @@ body {
 header {
   border-bottom: 2px solid hsl(223, 64%, 98%);
   height: 115px;
-  padding: 0 4.3rem;
+  padding:0px 7.3rem;
 }
 
 nav {
@@ -41,7 +41,6 @@ nav {
 
 .burger-menu {
   display: none;
-  /* Hide by default */
   cursor: pointer;
 }
 
@@ -50,7 +49,7 @@ nav {
 }
 
 nav .logo {
-  padding: 2.8rem 0;
+  padding: 2.8rem 2rem;
 }
 
 nav ul {
@@ -101,6 +100,7 @@ nav .buy {
   flex: 1;
   align-items: center;
   justify-content: flex-end;
+  gap: 2rem;
 }
 
 .continer-Cart {
@@ -135,6 +135,7 @@ nav .buy .cart span {
 .show-Product {
   display: none;
   flex-direction: column;
+  border-radius: 15px;
   background-color: hsl(0, 0%, 100%);
   position: absolute;
   width: 380px;
@@ -178,12 +179,14 @@ nav .buy .cart span {
   text-transform: capitalize;
   line-height: 2;
 }
-
+.containerPrice{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 .show-Product section .name-and-price .native-dropdown {
   margin: 0 6px;
-  border: 1px solid;
   padding: 3px;
-  background: hsl(223, 64%, 98%);
   border-radius: 9px;
   transition: 0.3s;
 }
@@ -258,6 +261,19 @@ nav .buy .avatar:hover img {
 
 /* Styles for burger menu in smaller screens */
 @media (max-width: 768px) {
+<<<<<<< Updated upstream
+=======
+  .show-Product{
+    width: 370px;
+    top: calc(206% + 30px);
+    left: -163%;
+    z-index: 5;
+  }
+  .show-Product section .name-and-price .native-dropdown {
+    display: block;
+    width: fit-content;
+  }
+>>>>>>> Stashed changes
   .burger-menu {
     margin: 0 11px;
     display: block;
@@ -384,7 +400,10 @@ nav #overlay {
   }
 
   header {
-    padding: 0px 3.3rem;
+    padding: 0px 1.3rem;
+  }
+  nav .logo {
+    padding: 2.8rem 0px;
   }
 }
 
@@ -408,7 +427,20 @@ main .container {
   width: 40%;
 }
 
+<<<<<<< Updated upstream
 #MasterImg img {
+=======
+#MasterImg {
+  position: relative;
+}
+#MasterImg #btn-prev,
+#MasterImg #btn-next {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#MasterImg .shoes {
+>>>>>>> Stashed changes
   border-radius: 15px;
   width: 100%;
   margin-bottom: 40px;
@@ -463,9 +495,6 @@ main .container #overlay-imgs-Product {
   position: absolute;
   right: 0;
   top: -45px;
-  background-image: url(./images/icon-close.svg);
-  background-repeat: no-repeat;
-  background-size: contain;
   width: 2rem;
   height: 2rem;
   background-color: transparent;
@@ -474,9 +503,16 @@ main .container #overlay-imgs-Product {
   filter: invert(28%) sepia(31%) saturate(5768%) hue-rotate(229deg)
     brightness(265%) contrast(127%);
 }
+<<<<<<< Updated upstream
 
 #prevButton,
 #nextButton {
+=======
+#btn-prev,
+#btn-next,
+.prevButton,
+.nextButton {
+>>>>>>> Stashed changes
   position: absolute;
   top: 50%;
   border: none;
@@ -484,6 +520,7 @@ main .container #overlay-imgs-Product {
   width: 45px;
   height: 45px;
   border-radius: 50%;
+<<<<<<< Updated upstream
   background-image: url(./images/icon-close.svg);
   background-repeat: no-repeat;
   background-position: center;
@@ -505,7 +542,62 @@ main .container #overlay-imgs-Product {
 #nextButton {
   background-image: url(./images/icon-next.svg);
   right: 0;
+=======
+  cursor: pointer;
+  border: transparent;
+  transition: border 0.3s linear;
 }
+#btn-prev:hover,
+#btn-next:hover,
+.prevButton:hover,
+.nextButton:hover {
+  border: 2px solid hsl(26, 100%, 55%);
+  background-color: hsl(25, 100%, 94%);
+}
+#btn-next,
+.nextButton {
+  right: -45px;
+>>>>>>> Stashed changes
+}
+
+/* 
+.prevButton,
+.nextButton {
+  position: absolute;
+  top: 50%;
+  border: none;
+  transform: translate(-50%, -50%);
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: transparent;
+  transition: border 0.3s linear;
+}
+.prevButton:hover,
+.nextButton:hover {
+  border: 2px solid hsl(26, 100%, 55%);
+  background-color: hsl(25, 100%, 94%);
+}
+.prevButton {
+  left: 0;
+}
+
+.nextButton {
+  right: -45px;
+}
+*/
+
+
+
+
+
+
+
+
+
+
+
 
 .modal-content img {
   margin: 0 auto;
@@ -635,7 +727,23 @@ main .container #overlay-imgs-Product {
     padding-left: 0;
     padding-right: 0;
   }
+<<<<<<< Updated upstream
 
+=======
+  #MasterImg {
+    margin-bottom: 40px;
+  }
+  #MasterImg #btn-prev,
+  #MasterImg #btn-next {
+    display: block;
+  }
+  #MasterImg #btn-prev {
+    left: 35px;
+  }
+  #MasterImg #btn-next {
+    right: 0;
+  }
+>>>>>>> Stashed changes
   #MasterImg img {
     border-radius: 0;
   }
