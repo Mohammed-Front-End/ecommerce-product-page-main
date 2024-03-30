@@ -432,24 +432,18 @@ main .container {
   justify-content: space-between;
   width: 100%;
   flex-wrap: wrap;
-  overflow: hidden;
-  position: relative;
-  
 }
 
-#underContainer .carousel-item:first-child img{
+#underContainer img:first-child {
   opacity: 0.3;
 }
 
-.carousel-item img {
+#underContainer img {
   height: 100px;
   border-radius: 15px;
   border: 2px solid transparent;
   transition: border-color 0.3s;
-  width: 100%;
-  object-fit: cover;
 }
-
 
 #underContainer img:hover {
   border-color: hsl(26, 100%, 55%);
@@ -534,7 +528,6 @@ main .container #overlay-imgs-Product {
 }
 
 #mainImgContainer {
-  position: relative;
   text-align: center;
   margin-bottom: 20px;
   display: flex;
