@@ -2,35 +2,28 @@ const burgerMenu = document.querySelector('.burger-menu');
 const menuLinks = document.querySelector('.menu-links');
 const overlayMenu = document.getElementById("overlay");
 const closeButtonMenu = document.querySelector('.close');
-
 burgerMenu.addEventListener('click', function() {
   menuLinks.classList.toggle('open');
   burgerMenu.classList.toggle('open');
-
   const isMenuOpen = menuLinks.classList.contains("open");
   overlayMenu.style.opacity = isMenuOpen ? "1" : "0";
   overlayMenu.style.visibility = isMenuOpen ? "visible" : "hidden";
   overlayMenu.style.pointerEvents = isMenuOpen ? "auto" : "none";
-
   menuLinks.setAttribute("aria-expanded", isMenuOpen.toString());
   closeButtonMenu.setAttribute("aria-expanded", isMenuOpen.toString());
 });
-
 document.querySelector('.close').addEventListener('click', function () {
   menuLinks.classList.remove("open");
   burgerMenu.classList.remove("open");
-
   overlayMenu.style.opacity = "0";
   overlayMenu.style.visibility = "hidden";
   overlayMenu.style.pointerEvents = "none";
   menuLinks.setAttribute("aria-expanded", "false");
   closeButtonMenu.setAttribute("aria-expanded", "false");
 });
-
 overlayMenu.addEventListener('click', function() {
   menuLinks.classList.remove("open");
   burgerMenu.classList.remove("open");
-
   overlayMenu.style.opacity = "0";
   overlayMenu.style.visibility = "hidden";
   overlayMenu.style.pointerEvents = "none";
@@ -42,19 +35,112 @@ overlayMenu.addEventListener('click', function() {
 
 
 
-// Start Product 
-// Products imges 
-const imgs = document.querySelectorAll('.imgs-Product img');
-const overlay = document.getElementById('overlay-imgs-Product');
-// const shoes = document.querySelector('.shoes')
-const mainImgContainer = document.getElementById('mainImgContainer');
-const underlayImgsContainer = document.getElementById('underlayImgsContainer');
-let imge = document.querySelector('.imge')
+let overlay = document.getElementById('overlay-imgs-Product');
+let underlayImgsContainer = document.querySelector('.underlayImgsContainer');
+let mainImgContainer = document.getElementById('mainImgContainer');
+let largeImage = document.querySelector('.shoes');
+let smallImages = document.querySelectorAll('#underContainer img');
+let nextButton = document.querySelector('.btn-next');
+let prevButton = document.querySelector('.btn-prev');
 
-let currentIndex = 0; 
-// Track the index of the currently displayed image
+let currentIndex = 0;
+let isDragging = false;
+let startX = 0;
+let startTranslateX = 0;
+// let nextImage = null;
 
-// Function to display the image at the specified index
+function updateLargeImage() {
+  largeImage.src = smallImages[currentIndex].src.replace('-thumbnail', '');
+  smallImages.forEach((img, index) => {
+    img.classList.toggle('active', index === currentIndex);
+  });
+}
+
+function updateAdjacentSmallImage(direction) {
+  let newIndex = currentIndex + direction;
+  if (newIndex >= 0 && newIndex < smallImages.length) {
+    smallImages[newIndex].src = smallImages[newIndex].src.replace('-thumbnail', '');
+  }
+}
+
+function handleMouseDown(e) {
+  if (e.target === largeImage) {
+    isDragging = true;
+    startX = e.clientX;
+    startTranslateX = largeImage.getBoundingClientRect().left;
+    // nextImage = document.createElement('img');
+    // nextImage.src = smallImages[(currentIndex + 1) % smallImages.length].src.replace('-thumbnail', '');
+    // nextImage.classList.add('next-image');
+    // mainImgContainer.appendChild(nextImage);
+  }
+}
+
+function handleMouseMove(e) {
+  if (isDragging) {
+    const diffX = e.clientX - startX;
+    const newTranslateX = startTranslateX + diffX;
+    largeImage.style.transform = `translateX(${newTranslateX}px)`;
+  }
+}
+
+function handleMouseUp(e) {
+  if (isDragging) {
+    isDragging = false;
+    const diffX = e.clientX - startX;
+    const threshold = largeImage.clientWidth * 0.2; // 30% of large image width
+    if (Math.abs(diffX) > threshold) {
+      currentIndex = (currentIndex + (diffX > 0 ? 1 : -1) + smallImages.length) % smallImages.length;
+      updateLargeImage();
+      updateAdjacentSmallImage(diffX > 0 ? 1 : -1);
+    }
+    largeImage.style.transform = '';
+    // if (nextImage) {
+    //   nextImage.remove();
+    //   nextImage = null;
+    // }
+  }
+}
+
+nextButton.addEventListener('click', () => {
+  currentIndex = (currentIndex + 1) % smallImages.length;
+  updateLargeImage();
+});
+
+prevButton.addEventListener('click', () => {
+  currentIndex = (currentIndex - 1 + smallImages.length) % smallImages.length;
+  updateLargeImage();
+});
+
+largeImage.addEventListener('mousedown', handleMouseDown);
+document.addEventListener('mousemove', handleMouseMove);
+document.addEventListener('mouseup', handleMouseUp);
+
+// Event listeners for clicking on small images to update the large image
+smallImages.forEach(function(smallImage, index) {
+  smallImage.addEventListener('click', function() {
+    currentIndex = index;
+    updateLargeImage();
+  });
+});
+
+// Grabbing functionality for large image
+largeImage.style.cursor = "grab";
+largeImage.addEventListener('mousedown', () => {
+  largeImage.style.cursor = "grabbing";
+});
+document.addEventListener('mouseup', () => {
+  largeImage.style.cursor = "grab";
+});
+
+/**/ 
+
+
+
+
+
+
+/*
+TODO Function to display the image at the specified index
 function displayImage(index) {
 const img = imgs[index];
 const imgSrc = img.src.split('-thumbnail').join('');
@@ -65,13 +151,18 @@ console.log(img);
 mainImgContainer.innerHTML = `<img src="${imgSrc}" alt="${imgAlt}">`; // Display the clicked image
 currentIndex = index;
 
-// Show all other images underneath the clicked image
+! Show all other images underneath the clicked image
 underlayImgsContainer.innerHTML = ''; // Clear previous underlay images
 imgs.forEach((img, i) => {
   if (i !== index) {
-    const imgClone = img.cloneNode(true); // Create a clone of the image
-    imgClone.classList.add('underlay-img'); // Add a class to differentiate underlay images
-    underlayImgsContainer.appendChild(imgClone); // Append the cloned image to the underlay images container
+    !Create a clone of the image
+    const imgClone = img.cloneNode(true); 
+
+    ! Add a class to differentiate underlay images
+    imgClone.classList.add('underlay-img'); 
+
+    !Append the cloned image to the underlay images container
+    underlayImgsContainer.appendChild(imgClone);
   }
 });
 }
@@ -85,7 +176,7 @@ displayImage(0); // Display the first image
 
 // Event listeners for each image
 
-imgs.forEach((img, index) => {
+shoes.forEach((img, index) => {
 img.addEventListener('click', function() {
   showOverlay(); // Show overlay when an image is clicked
 });
@@ -112,33 +203,15 @@ displayImage(currentIndex);
 
 
 
-
-// const btnPrevMobile = document.getElementById('btn-prev');
-// btnPrevMobile.addEventListener('click', function() {
-//   // Move to the previous image
-//   currentIndex = (currentIndex - 1 + imgs.length) % imgs.length;
-//   displayImage(currentIndex);
-// });
-// const btnNextMobile = document.getElementById('btn-next');
-// btnNextMobile.addEventListener('click', function() {
-//   // Move to the next image
-//   currentIndex = (currentIndex + 1) % imgs.length;
-//   displayImage(currentIndex);
-// });
-
-
-
-
-
 // Close button event listener
 const closeButton = document.getElementById('closeButton');
 closeButton.addEventListener('click', function() {
 overlay.style.display = 'none'; // Hide the overlay
 });
 
-// Add the images dynamically
+! Add the images dynamically
 for (let i = 1; i <= 4; i++) {
-// Create main image element
+! Create main image element
 const mainImg = document.createElement('img');
 mainImg.src = `./images/image-product-${i}.jpg`;
 mainImg.alt = `Product ${i}`;
@@ -150,9 +223,7 @@ thumbnailImg.src = `./images/image-product-${i}-thumbnail.jpg`;
 thumbnailImg.alt = `Product ${i} Thumbnail`;
 underlayImgsContainer.appendChild(thumbnailImg);
 }
-
-
-
+*/ 
 
 
 
@@ -177,18 +248,13 @@ let cart = document.querySelector('.cart')
 let showProduct = document.querySelector('.show-Product');
 let showProductSection = document.querySelector('.show-Product section');
 let imagSection = document.querySelector('.show-Product section img');
-
-// container of prodcut 
 let nameAndPrice = document.querySelector('.name-and-price')
-// show-Product 
 let nameProductInCar = document.querySelector('.nameProduct');
 let priceProduct = document.querySelector('.price-product');
 let countProduct = document.querySelector('.count-product');
 let totlePrice = document.querySelector('.totle-price');
 let checkout = document.querySelector('.Checkout');
 let emptySpan = document.querySelector('.emptySpan')
-
-
 function updateDisplay() {
 if (numberOfProcduct.innerHTML === '0' || numberOfProcduct.textContent === '') {
   numberOfProcduct.style.display = 'none';
@@ -202,8 +268,6 @@ if (numberOfProcduct.innerHTML === '0' || numberOfProcduct.textContent === '') {
   checkout.style.display = 'block';
 }
 }
-// updateDisplay() 
-
 cart.addEventListener('click', function() {
 showProduct.style.display = 'flex';
 });
@@ -213,7 +277,6 @@ if (!showProduct.contains(target) && target !== cart) {
     showProduct.style.display = 'none';
 }
 });
-
 plus.addEventListener('click',function(e){
   let currentValue = parseInt(addRemove.innerHTML);
   
@@ -224,7 +287,6 @@ plus.addEventListener('click',function(e){
     console.log("Maximum value reached!");
   }
 });
-
 minus.addEventListener('click',function(e){
 let currentValue = parseInt(addRemove.innerHTML);
 let decreasingValue = currentValue - 1;
@@ -234,7 +296,6 @@ if(addRemove.innerHTML > 0){
   console.log("min value reached!");
 }
 })
-
 // preice item
 let newPrice = parseInt(price.innerHTML.replace(/[^0-9.]/g, ""));
 addCart.addEventListener('click', function (){
@@ -245,15 +306,9 @@ let currentValue = parseInt(addRemove.innerHTML);
 let name = nameProduct.innerHTML;
 // price  span from element price
 nameProductInCar.innerHTML = name;
-
 priceProduct.innerHTML = `$${newPrice}.00`;
-// let totalCollection = newPrice  *  currentValue; 
-
-
 let totalQuantity;
 let existingValue = parseInt(numberOfProcduct.textContent);
-
-// let totalCollection = newPrice * currentValue; 
 if (!isNaN(existingValue)) {
   totalQuantity = existingValue + currentValue;
   if (totalQuantity > quantity) {
@@ -265,18 +320,13 @@ if (!isNaN(existingValue)) {
   numberOfProcduct.textContent = currentValue;
 }
 let totalCollection = newPrice * parseInt(numberOfProcduct.textContent);
-
 totlePrice.innerHTML = `$${totalCollection}.00`;
-
-
-
 // reset the array
 function resetCart() {
   ArrayProduct = []; 
   numberOfProcduct.textContent = '0'; 
   totlePrice.textContent = '$0.00'; 
 }
-
 updateDisplay();
 priceProduct.innerHTML = `$${newPrice}.00  x`;
 ArrayProduct.push(currentValue,totalCollection,name);
@@ -287,14 +337,12 @@ for (let i = 1; i <= quantity; i++) {
   option.textContent = i;
   countProduct.appendChild(option);
 }
-
 countProduct.value =  numberOfProcduct.textContent;
 countProduct.addEventListener('change', function() {
   let selectedValue = parseInt(this.value);
   totlePrice.innerHTML = `$${selectedValue * newPrice}.00`;
   numberOfProcduct.innerHTML = selectedValue;
 })
-
 let deleteProduct = document.querySelector('.delete');
 let currentCount = parseInt(countProduct.value);
 // display again all items
@@ -318,7 +366,6 @@ checkout.addEventListener('click',function(e){
   imagSection.style.display = 'none';
   checkout.style.display = 'none';
   showProductSection.style.padding = '0'
-
   let congratulations = document.querySelector('.congratulations')
   congratulations.style.display = 'block';
   setTimeout( s=>{
@@ -328,8 +375,6 @@ checkout.addEventListener('click',function(e){
   },800)
 })
 });
-
-
 function deleteItem (){
 let deleteProduct = document.querySelector('.delete');
 let currentValue = parseInt(addRemove.innerHTML);
