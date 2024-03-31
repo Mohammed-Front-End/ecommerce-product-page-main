@@ -28,20 +28,17 @@ body {
 header {
   border-bottom: 2px solid hsl(223, 64%, 98%);
   height: 115px;
-  padding: 0 4.3rem;
 }
 
 nav {
   display: flex;
-  flex-wrap: wrap;
   width: 100%;
   align-items: center;
-  justify-content: flex-start;
+  flex-wrap: wrap;
 }
 
 .burger-menu {
   display: none;
-  /* Hide by default */
   cursor: pointer;
 }
 
@@ -50,26 +47,35 @@ nav {
 }
 
 nav .logo {
-  padding: 2.8rem 0;
+  display: flex;
+  margin: 0px 8px;
+  align-items: center;
+  justify-content: center;
+  flex-basis: 15%;
 }
-
+nav .logo a img {
+  display: flex;
+  width: 145px;
+  flex-wrap: wrap;
+  padding: 2.7rem 0rem;
+}
 nav ul {
   display: flex;
-  flex: 1;
-  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  flex-basis: 60%;
 }
 
 nav ul li {
   position: relative;
   display: flex;
   align-items: center;
-  flex-basis: 100%;
+  min-width: 80px;
   justify-content: center;
 }
 
 nav ul li a {
   color: hsl(219, 9%, 45%);
-  font-size: 1.2rem;
   position: relative;
   transition: color 0.4s;
   padding: 2.8rem 0.5rem;
@@ -97,10 +103,11 @@ nav ul li:hover a::before {
 
 nav .buy {
   display: flex;
-  max-height: 100%;
-  flex: 1;
+  flex-basis: 15%;
+  /* flex: 1; */
   align-items: center;
-  justify-content: flex-end;
+  justify-content: center;
+  gap: 1rem;
 }
 
 .continer-Cart {
@@ -135,6 +142,7 @@ nav .buy .cart span {
 .show-Product {
   display: none;
   flex-direction: column;
+  border-radius: 15px;
   background-color: hsl(0, 0%, 100%);
   position: absolute;
   width: 380px;
@@ -178,12 +186,14 @@ nav .buy .cart span {
   text-transform: capitalize;
   line-height: 2;
 }
-
+.containerPrice {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 .show-Product section .name-and-price .native-dropdown {
   margin: 0 6px;
-  border: 1px solid;
   padding: 3px;
-  background: hsl(223, 64%, 98%);
   border-radius: 9px;
   transition: 0.3s;
 }
@@ -202,12 +212,12 @@ nav .buy .cart span {
   font-weight: 800;
   color: black;
 }
-.emptySpan{
+.emptySpan {
   display: block;
   padding: 69px 20px;
   margin: 0 auto;
 }
-.congratulations{
+.congratulations {
   display: none;
   padding: 69px 20px;
   margin: 0 auto;
@@ -258,15 +268,17 @@ nav .buy .avatar:hover img {
 
 /* Styles for burger menu in smaller screens */
 @media (max-width: 768px) {
-  .show-Product{
-    width: 324px;
+  .show-Product {
+    width: 370px;
     top: calc(206% + 30px);
     left: -163%;
+    z-index: 5;
   }
   .show-Product section .name-and-price .native-dropdown {
     display: block;
     width: fit-content;
   }
+
   .burger-menu {
     margin: 0 11px;
     display: block;
@@ -291,11 +303,6 @@ nav #overlay {
 /* Media query for mobile devices */
 
 @media (max-width: 768px) {
-  /* Hide menu links by default */
-  header {
-    padding: 0;
-  }
-
   .menu-links {
     position: fixed;
     top: 0;
@@ -308,16 +315,10 @@ nav #overlay {
     align-items: flex-start;
     transition: left 0.3s;
   }
-
-  nav .logo {
-    padding: 2.3rem 0;
-  }
-
   .menu-links.open {
     display: flex;
     left: 0;
   }
-
   .menu-links .close {
     display: block;
     font-size: 33px;
@@ -334,7 +335,6 @@ nav #overlay {
     border: none;
     text-align: left;
   }
-
   nav #overlay {
     position: fixed;
     display: block;
@@ -350,7 +350,11 @@ nav #overlay {
     pointer-events: none;
     transition: opacity 0.3s, visibility 0.3s;
   }
-
+  nav .buy {
+    flex: 1;
+    flex-basis: 0%;
+    justify-content: flex-end;
+  }
   .menu-links .avatar {
     display: block;
     font-size: 33px;
@@ -358,29 +362,20 @@ nav #overlay {
     padding: 17px 40px;
     cursor: pointer;
   }
-
   nav ul li {
     flex-basis: 0%;
     padding-left: 2.3rem;
   }
-
-  nav ul li a {
-    padding: 2.3rem 0;
-  }
-
-  /* Show menu links when burger menu icon is clicked */
   #burger-checkbox:checked + .burger-menu + .menu-links {
     display: block;
     left: 0%;
   }
-
   .menu-links ul {
     display: block;
     text-align: center;
     padding-top: 100px;
     /* Adjust as needed */
   }
-
   .menu-links ul li {
     display: block;
     margin-bottom: 20px;
@@ -390,10 +385,6 @@ nav #overlay {
 @media screen and (min-width: 769px) and (max-width: 992px) {
   .menu-links li a {
     font-size: 1rem !important;
-  }
-
-  header {
-    padding: 0px 3.3rem;
   }
 }
 
@@ -416,17 +407,23 @@ main .container {
   justify-content: space-between;
   width: 40%;
 }
-
-#MasterImg #btn-prev,
-#MasterImg #btn-next {
-  display: none;
+#MasterImg {
+  position: relative;
 }
-#MasterImg img {
+#MasterImg .btn-prev,
+#MasterImg .btn-next {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#MasterImg .shoes {
   border-radius: 15px;
   width: 100%;
   margin-bottom: 40px;
 }
-
+#MasterImg > .item{
+  overflow: hidden;
+}
 .imgs-Product img {
   cursor: pointer;
 }
@@ -436,24 +433,18 @@ main .container {
   justify-content: space-between;
   width: 100%;
   flex-wrap: wrap;
-  overflow: hidden;
-  position: relative;
-  
 }
 
-#underContainer .carousel-item:first-child img{
+.active {
   opacity: 0.3;
 }
 
-.carousel-item img {
+#underContainer img {
   height: 100px;
   border-radius: 15px;
   border: 2px solid transparent;
   transition: border-color 0.3s;
-  width: 100%;
-  object-fit: cover;
 }
-
 
 #underContainer img:hover {
   border-color: hsl(26, 100%, 55%);
@@ -461,7 +452,7 @@ main .container {
 }
 
 main .container #overlay-imgs-Product {
-  Z-INDEX: 20;
+  z-index: 20;
   position: fixed;
   top: 0;
   left: 0;
@@ -479,55 +470,40 @@ main .container #overlay-imgs-Product {
 
 #closeButton {
   position: absolute;
-  right: 0;
-  top: -45px;
-  background-image: url(./images/icon-close.svg);
-  background-repeat: no-repeat;
-  background-size: contain;
-  width: 2rem;
-  height: 2rem;
+  right: 13px;
+  top: 9px;
   background-color: transparent;
   border: none;
   cursor: pointer;
-  filter: invert(28%) sepia(31%) saturate(5768%) hue-rotate(229deg)
-    brightness(265%) contrast(127%);
 }
-#btn-prev,
-#btn-next,
-#prevButton,
-#nextButton {
+
+.btn-prev,
+.btn-next{
   position: absolute;
   top: 50%;
-  border: none;
+  border: transparent;
   transform: translate(-50%, -50%);
   width: 45px;
   height: 45px;
   border-radius: 50%;
-  background-image: url(./images/icon-close.svg);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: auto;
+  border-width: 2px;
   cursor: pointer;
-  transition: border 0.3s ;
-  -webkit-transition: border 0.3s ;
-  -moz-transition: border 0.3s ;
-  -ms-transition: border 0.3s ;
-  -o-transition: border 0.3s ;
+  background-size: auto;
+  transition: border 0.3s linear;
+  z-index: 999;
 }
-#btn-prev,
-#btn-next,
-#prevButton:hover,
-#nextButton:hover {
+.nextButton {
+  right: 0;
+  cursor: pointer;
+  border: transparent;
+  transition: border 0.3s linear;
+}
+.btn-prev:hover,
+.btn-next:hover {
   border: 2px solid hsl(26, 100%, 55%);
-  background-color: hsl(25, 100%, 94%);
+  background-color:  hsl(0, 0%, 100%);
 }
-#btn-prev,
-#prevButton {
-  background-image: url(./images/icon-previous.svg);
-}
-#btn-next,
-#nextButton {
-  background-image: url(./images/icon-next.svg);
+.btn-next {
   right: -45px;
 }
 
@@ -536,7 +512,6 @@ main .container #overlay-imgs-Product {
 }
 
 #mainImgContainer {
-  position: relative;
   text-align: center;
   margin-bottom: 20px;
   display: flex;
@@ -627,7 +602,7 @@ main .container #overlay-imgs-Product {
 .plus-minus .minus,
 .plus-minus .plus {
   background-color: transparent;
-  border: navajowhite;
+  border: none;
   padding: 0 12px;
   cursor: pointer;
 }
@@ -635,9 +610,9 @@ main .container #overlay-imgs-Product {
 .plus-minus .add-btn {
   margin-left: 15px;
   background-color: hsl(26, 100%, 55%);
-  color: wheat;
+  color: hsl(0, 0%, 100%);
   padding: 18px 51px;
-  border: navajowhite;
+  border: none;
   border-radius: 10px;
   font-size: 17px;
   font-weight: 700;
@@ -662,20 +637,19 @@ main .container #overlay-imgs-Product {
   }
   #MasterImg {
     margin-bottom: 40px;
-    position: relative;
   }
-  #MasterImg #btn-prev,
-  #MasterImg #btn-next {
+  #MasterImg .btn-prev,
+  #MasterImg .btn-next {
     display: block;
   }
-  #MasterImg #btn-prev {
+  #MasterImg .btn-prev {
     left: 35px;
   }
-  #MasterImg #btn-next {
+  #MasterImg .btn-next {
     right: 0;
   }
-  #MasterImg img {
-    margin:0;
+
+  #MasterImg .shoes {
     border-radius: 0;
   }
 
@@ -739,10 +713,6 @@ main .container #overlay-imgs-Product {
 }
 
 @media screen and (min-width: 768px) and (max-width: 992px) {
-  .imgs-Product {
-    width: 48%;
-  }
-
   .imgs-price {
     width: 48%;
     margin-left: 1rem;
@@ -759,3 +729,7 @@ main .container #overlay-imgs-Product {
     width: 1170px;
   }
 }
+
+
+
+
