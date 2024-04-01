@@ -35,43 +35,88 @@ overlayMenu.addEventListener('click', function() {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 let overlay = document.getElementById('overlay-imgs-Product');
 let underlayImgsContainer = document.querySelector('.underlayImgsContainer');
 let mainImgContainer = document.getElementById('mainImgContainer');
+
+
 let largeImage = document.querySelector('.shoes');
 let smallImages = document.querySelectorAll('#underContainer img');
 let nextButton = document.querySelector('.btn-next');
 let prevButton = document.querySelector('.btn-prev');
+let itemImges = document.querySelectorAll('#MasterImg > .item img')
+let slider = document.querySelector('.slider')
+let item = document.querySelectorAll('.slider .item')
+let shoes = document.querySelectorAll('.slider .item shoes')
+
 
 let currentIndex = 0;
 let isDragging = false;
 let startX = 0;
 let startTranslateX = 0;
-// let nextImage = null;
+const slideWidth = item[0].clientWidth;
+console.log(slideWidth);
 
+prevButton.addEventListener('click', () => {
+  currentIndex = (currentIndex - 1 + item.length) % item.length;
+  updateCarousel();
+  updateLargeImage();
+});
+nextButton.addEventListener('click', () => {
+  currentIndex = (currentIndex + 1) % item.length;
+  updateCarousel();
+  updateLargeImage();
+});
+function updateCarousel() {
+  let sliderContainer = document.getElementById('MasterImg').offsetWidth;
+  
+  const offset = -currentIndex * sliderContainer;
+  console.log('currentIndex',-currentIndex);
+  console.log('slideWidth',slideWidth);
+  console.log('offset',offset);
+  slider.style.transform = `translateX(${offset}px)`;
+}
+window.addEventListener('resize', updateCarousel);
+
+// Grabbing functionality for large image
+slider.style.cursor = "grab";
+slider.addEventListener('mousedown', () => {
+  slider.style.cursor = "grabbing";
+});
+document.addEventListener('mouseup', () => {
+  slider.style.cursor = "grab";
+});
 function updateLargeImage() {
-  largeImage.src = smallImages[currentIndex].src.replace('-thumbnail', '');
+  // largeImage.src = smallImages[currentIndex].src.replace('-thumbnail', '');
   smallImages.forEach((img, index) => {
     img.classList.toggle('active', index === currentIndex);
   });
 }
-
-function updateAdjacentSmallImage(direction) {
-  let newIndex = currentIndex + direction;
-  if (newIndex >= 0 && newIndex < smallImages.length) {
-    smallImages[newIndex].src = smallImages[newIndex].src.replace('-thumbnail', '');
-  }
-}
-
 function handleMouseDown(e) {
   if (e.target === largeImage) {
     isDragging = true;
-    startX = e.clientX;
-    startTranslateX = largeImage.getBoundingClientRect().left;
-    // nextImage = document.createElement('img');
-    // nextImage.src = smallImages[(currentIndex + 1) % smallImages.length].src.replace('-thumbnail', '');
-    // nextImage.classList.add('next-image');
-    // mainImgContainer.appendChild(nextImage);
+    console.log(startX = e.clientX);
+    console.log(startTranslateX = largeImage.getBoundingClientRect().left);
   }
 }
 
@@ -79,37 +124,25 @@ function handleMouseMove(e) {
   if (isDragging) {
     const diffX = e.clientX - startX;
     const newTranslateX = startTranslateX + diffX;
-    largeImage.style.transform = `translateX(${newTranslateX}px)`;
+    slider.style.transition = 'none'; 
+    slider.style.transform = `translateX(${newTranslateX}px)`;
   }
 }
-
 function handleMouseUp(e) {
   if (isDragging) {
-    isDragging = false;
     const diffX = e.clientX - startX;
-    const threshold = largeImage.clientWidth * 0.2; // 30% of large image width
+    const threshold = largeImage.clientWidth * 0.3; // 30% of large image width
     if (Math.abs(diffX) > threshold) {
-      currentIndex = (currentIndex + (diffX > 0 ? 1 : -1) + smallImages.length) % smallImages.length;
+      currentIndex += diffX > 0 ? 1 : -1;
+
+      currentIndex = (currentIndex + smallImages.length) % smallImages.length;
       updateLargeImage();
-      updateAdjacentSmallImage(diffX > 0 ? 1 : -1);
     }
-    largeImage.style.transform = '';
-    // if (nextImage) {
-    //   nextImage.remove();
-    //   nextImage = null;
-    // }
+    slider.style.transition = 'transform 0.5s ease-in-out';
+    slider.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+    isDragging = false;
   }
 }
-
-nextButton.addEventListener('click', () => {
-  currentIndex = (currentIndex + 1) % smallImages.length;
-  updateLargeImage();
-});
-
-prevButton.addEventListener('click', () => {
-  currentIndex = (currentIndex - 1 + smallImages.length) % smallImages.length;
-  updateLargeImage();
-});
 
 largeImage.addEventListener('mousedown', handleMouseDown);
 document.addEventListener('mousemove', handleMouseMove);
@@ -123,16 +156,6 @@ smallImages.forEach(function(smallImage, index) {
   });
 });
 
-// Grabbing functionality for large image
-largeImage.style.cursor = "grab";
-largeImage.addEventListener('mousedown', () => {
-  largeImage.style.cursor = "grabbing";
-});
-document.addEventListener('mouseup', () => {
-  largeImage.style.cursor = "grab";
-});
-
-/**/ 
 
 
 

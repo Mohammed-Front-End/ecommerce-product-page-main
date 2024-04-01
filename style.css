@@ -409,48 +409,89 @@ main .container {
 }
 #MasterImg {
   position: relative;
+  overflow: hidden;
 }
-#MasterImg .btn-prev,
-#MasterImg .btn-next {
+.MasterImg .btn-prev,
+.MasterImg .btn-next{
   display: flex;
   align-items: center;
   justify-content: center;
+  position: absolute;
+  top: 50%;
+  border: transparent;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  border-width: 2px;
+  cursor: pointer;
+  background-size: auto;
+  transition: border 0.3s linear;
+  z-index: 999;
 }
+.MasterImg .btn-next {
+  right: 0;
+  transform: translateY(-50%);
+  cursor: pointer;
+  border: transparent;
+  transition: border 0.3s linear;
+}
+#MasterImg .btn-prev {
+  left: 0; 
+  transform: translateY(-50%);
+}
+.MasterImg .btn-prev:hover,
+.MasterImg .btn-next:hover {
+  border: 2px solid hsl(26, 100%, 55%);
+  background-color:  hsl(0, 0%, 100%);
+}
+
 #MasterImg .shoes {
   border-radius: 15px;
   width: 100%;
-  margin-bottom: 40px;
 }
 #MasterImg > .item{
-  overflow: hidden;
+  display: flex;
+  border: 5px solid;
 }
 .imgs-Product img {
   cursor: pointer;
 }
+.slider{
+  margin-bottom: 40px;
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  /* overflow: hidden; */
+}
+.slider .item{
+  min-width: 100%;
+  min-height: 100%;
+}
 
+
+
+
+
+
+
+.active {
+  opacity: 0.3;
+}
 #underContainer {
   display: flex;
   justify-content: space-between;
   width: 100%;
   flex-wrap: wrap;
 }
-
-.active {
-  opacity: 0.3;
-}
-
 #underContainer img {
   height: 100px;
   border-radius: 15px;
   border: 2px solid transparent;
   transition: border-color 0.3s;
 }
-
 #underContainer img:hover {
   border-color: hsl(26, 100%, 55%);
   opacity: 0.6;
 }
-
 main .container #overlay-imgs-Product {
   z-index: 20;
   position: fixed;
@@ -475,36 +516,6 @@ main .container #overlay-imgs-Product {
   background-color: transparent;
   border: none;
   cursor: pointer;
-}
-
-.btn-prev,
-.btn-next{
-  position: absolute;
-  top: 50%;
-  border: transparent;
-  transform: translate(-50%, -50%);
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
-  border-width: 2px;
-  cursor: pointer;
-  background-size: auto;
-  transition: border 0.3s linear;
-  z-index: 999;
-}
-.nextButton {
-  right: 0;
-  cursor: pointer;
-  border: transparent;
-  transition: border 0.3s linear;
-}
-.btn-prev:hover,
-.btn-next:hover {
-  border: 2px solid hsl(26, 100%, 55%);
-  background-color:  hsl(0, 0%, 100%);
-}
-.btn-next {
-  right: -45px;
 }
 
 .modal-content img {
