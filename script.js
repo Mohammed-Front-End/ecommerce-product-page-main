@@ -54,107 +54,153 @@ overlayMenu.addEventListener('click', function() {
 
 
 
-
-let overlay = document.getElementById('overlay-imgs-Product');
-let underlayImgsContainer = document.querySelector('.underlayImgsContainer');
-let mainImgContainer = document.getElementById('mainImgContainer');
-
-
 let largeImage = document.querySelector('.shoes');
 let smallImages = document.querySelectorAll('#underContainer img');
 let nextButton = document.querySelector('.btn-next');
 let prevButton = document.querySelector('.btn-prev');
 let itemImges = document.querySelectorAll('#MasterImg > .item img')
 let slider = document.querySelector('.slider')
-let item = document.querySelectorAll('.slider .item')
-let shoes = document.querySelectorAll('.slider .item shoes')
-
+// let item = document.querySelectorAll('.slider .item')
+let shoes = document.querySelectorAll('.shoes')
+let itemsOfSlider = document.querySelectorAll('.slider .item');
 
 let currentIndex = 0;
 let isDragging = false;
 let startX = 0;
 let startTranslateX = 0;
-const slideWidth = item[0].clientWidth;
-console.log(slideWidth);
+const slideWidth = itemsOfSlider[0].clientWidth;
+
+const options = {}
+const observer = new IntersectionObserver ((entries) => {
+  console.log(entries);
+  entries
+
+},options) 
+
+shoes.forEach((img)=>{
+  observer.observe(img)
+})
+
+
 
 prevButton.addEventListener('click', () => {
-  currentIndex = (currentIndex - 1 + item.length) % item.length;
+  updateCurrentIndex( (currentIndex - 1 + itemsOfSlider.length) % itemsOfSlider.length);
   updateCarousel();
-  updateLargeImage();
+  toggleclassActive();
 });
 nextButton.addEventListener('click', () => {
-  currentIndex = (currentIndex + 1) % item.length;
+  updateCurrentIndex( (currentIndex + 1) % itemsOfSlider.length);
   updateCarousel();
-  updateLargeImage();
+  toggleclassActive();
 });
-function updateCarousel() {
-  let sliderContainer = document.getElementById('MasterImg').offsetWidth;
-  
-  const offset = -currentIndex * sliderContainer;
-  console.log('currentIndex',-currentIndex);
-  console.log('slideWidth',slideWidth);
-  console.log('offset',offset);
-  slider.style.transform = `translateX(${offset}px)`;
-}
-window.addEventListener('resize', updateCarousel);
 
-// Grabbing functionality for large image
-slider.style.cursor = "grab";
-slider.addEventListener('mousedown', () => {
-  slider.style.cursor = "grabbing";
+
+
+function updateCarousel() {
+  let slideWidth = document.querySelector('.item').offsetWidth;
+  let sliderContainerWidth = document.getElementById('MasterImg').offsetWidth;
+  const offset = -currentIndex * slideWidth;
+  const centerOffset = (sliderContainerWidth - slideWidth) / 2;
+  const newOffset = Math.min(offset, sliderContainerWidth - slideWidth);
+  slider.style.transform = `translateX(${newOffset + centerOffset}px)`;
+  updateButtonVisibility()
+}
+function updateButtonVisibility() {
+if (currentIndex === itemsOfSlider.length - 1) {
+  nextButton.style.display = 'none';
+} else {
+  nextButton.style.display = 'block';
+}
+if (currentIndex === 0) {
+  prevButton.style.display = 'none';
+} else {
+  prevButton.style.display = 'block';
+}
+}
+function updateCurrentIndex(newIndex) {
+  currentIndex = newIndex;
+  updateButtonVisibility();
+}
+
+window.addEventListener('resize', updateCarousel);
+updateCarousel();
+function updateAdjacentSmallImage(direction) {  
+  let newIndex = currentIndex + direction;
+  if (newIndex >= 0 && newIndex < slider.length) {
+    currentIndex = newIndex;
+    updateCarousel();
+  }
+}
+
+
+
+shoes.forEach(item => {
+  item.style.cursor = "grab";
+  item.addEventListener('mousedown', () => {
+    item.style.cursor = "grabbing";
+  });
 });
 document.addEventListener('mouseup', () => {
-  slider.style.cursor = "grab";
+  shoes.forEach(item => {
+    item.style.cursor = "grab";
+  });
 });
-function updateLargeImage() {
-  // largeImage.src = smallImages[currentIndex].src.replace('-thumbnail', '');
+function toggleclassActive() { 
   smallImages.forEach((img, index) => {
     img.classList.toggle('active', index === currentIndex);
   });
 }
 function handleMouseDown(e) {
-  if (e.target === largeImage) {
+  if (e.target.classList.contains('shoes')) {
     isDragging = true;
-    console.log(startX = e.clientX);
-    console.log(startTranslateX = largeImage.getBoundingClientRect().left);
+    startX = e.clientX;
+    startTranslateX = slider.scrollLeft;
+    slider.style.transition = 'none';
   }
 }
-
 function handleMouseMove(e) {
   if (isDragging) {
     const diffX = e.clientX - startX;
-    const newTranslateX = startTranslateX + diffX;
-    slider.style.transition = 'none'; 
-    slider.style.transform = `translateX(${newTranslateX}px)`;
+    slider.scrollLeft = startTranslateX - diffX;
   }
 }
 function handleMouseUp(e) {
   if (isDragging) {
-    const diffX = e.clientX - startX;
-    const threshold = largeImage.clientWidth * 0.3; // 30% of large image width
-    if (Math.abs(diffX) > threshold) {
-      currentIndex += diffX > 0 ? 1 : -1;
-
-      currentIndex = (currentIndex + smallImages.length) % smallImages.length;
-      updateLargeImage();
-    }
-    slider.style.transition = 'transform 0.5s ease-in-out';
-    slider.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
     isDragging = false;
+    const diffX = e.clientX - startX;
+    // Adjust as needed
+    const threshold = 50; 
+    if (Math.abs(diffX) > threshold) {
+      // Update index based on drag direction
+      currentIndex += diffX > 0 ? -1 : 1;
+      currentIndex = Math.max(0, Math.min(currentIndex, itemsOfSlider.length - 1));
+    }
+    slider.style.transition = 'transform 0.5s ease-in-out'; // Re-enable transition for smooth transition
+    updateCarousel();
+    toggleclassActive()
   }
 }
-
-largeImage.addEventListener('mousedown', handleMouseDown);
+//! //////////////////////////
+document.addEventListener('mousedown', handleMouseDown);
 document.addEventListener('mousemove', handleMouseMove);
 document.addEventListener('mouseup', handleMouseUp);
-
-// Event listeners for clicking on small images to update the large image
+//! ////////////////////
 smallImages.forEach(function(smallImage, index) {
   smallImage.addEventListener('click', function() {
     currentIndex = index;
-    updateLargeImage();
+    updateCurrentIndex(index);
+    toggleclassActive();
+    updateAdjacentSmallImage();
+    updateSliderTransform();
   });
 });
+function updateSliderTransform() {
+  const offset = -currentIndex * slideWidth;
+  slider.style.transition = 'transform 0.5s ease-in-out';
+  slider.style.transform = `translateX(${offset}px)`;
+}
+
+
 
 
 
