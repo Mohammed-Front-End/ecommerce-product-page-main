@@ -338,7 +338,7 @@ nav #overlay {
   nav #overlay {
     position: fixed;
     display: block;
-    width: 35%;
+    width: 100%;
     height: 100%;
     right: 0;
     top: 0;
@@ -388,6 +388,9 @@ nav #overlay {
   }
 }
 
+
+
+
 /* Start Product  */
 main .container {
   display: flex;
@@ -406,10 +409,14 @@ main .container {
   flex-wrap: wrap;
   justify-content: space-between;
   width: 40%;
+  opacity: 0;
+  visibility: hidden;
 }
-#MasterImg {
+.MasterImg {
   position: relative;
   overflow: hidden;
+  border-radius: 15px;
+  margin-bottom: 40px;
 }
 .MasterImg .btn-prev,
 .MasterImg .btn-next{
@@ -429,14 +436,14 @@ main .container {
   z-index: 999;
 }
 .MasterImg .btn-next {
-  right: 0;
+  right: 5px;
   transform: translateY(-50%);
   cursor: pointer;
   border: transparent;
   transition: border 0.3s linear;
 }
-#MasterImg .btn-prev {
-  left: 0; 
+.MasterImg .btn-prev {
+  left: 5px;
   transform: translateY(-50%);
 }
 .MasterImg .btn-prev:hover,
@@ -445,54 +452,46 @@ main .container {
   background-color:  hsl(0, 0%, 100%);
 }
 
-#MasterImg .shoes {
-  border-radius: 15px;
+.MasterImg .shoes {
   width: 100%;
+  height: 100%;
 }
-#MasterImg > .item{
+.MasterImg > .item{
   display: flex;
   border: 5px solid;
 }
 
 .slider{
-  margin-bottom: 40px;
   display: flex;
-  transition: transform 0.5s ease-in-out;
-  /* overflow: hidden; */
+  transition: transform 0.5s ease-in-out 0s;
 }
 .slider .item{
   min-width: 100%;
   min-height: 100%;
 }
 
-
-
-
-
-
-
 .active {
   opacity: 0.3;
 }
-#underContainer {
+.underlayImgsContainer {
   display: flex;
   justify-content: space-between;
   width: 100%;
   flex-wrap: wrap;
 }
-#underContainer img {
+.underlayImgsContainer img {
   cursor: pointer;
   height: 100px;
   border-radius: 15px;
   border: 2px solid transparent;
   transition: border-color 0.3s;
 }
-#underContainer img:hover {
+.underlayImgsContainer img:hover {
   border-color: hsl(26, 100%, 55%);
   opacity: 0.6;
 }
 main .container #overlay-imgs-Product {
-  z-index: 20;
+  z-index: 999;
   position: fixed;
   top: 0;
   left: 0;
@@ -506,47 +505,71 @@ main .container #overlay-imgs-Product {
 
 .modal-content {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 100%;
 }
 
 #closeButton {
   position: absolute;
   right: 13px;
-  top: 9px;
+  top: 1rem;
   background-color: transparent;
   border: none;
   cursor: pointer;
+  transform: scale(1.9);
 }
 
 .modal-content img {
   margin: 0 auto;
 }
 
-#mainImgContainer {
+.overlay-imgs-Product #mainImgContainer {
   text-align: center;
-  margin-bottom: 20px;
   display: flex;
-  width: 540px;
+  width: 630px;
+}
+.overlay-imgs-Product #mainImgContainer .MasterImg{
+  margin-bottom: 0;
 }
 
-#mainImgContainer img {
+.overlay-imgs-Product  .underlayImgsContainer .item{
+  width: 140px;
+  height: 140px;
+}
+.overlay-imgs-Product  .underlayImgsContainer .item img{
+  width: 100%;
+  height: 100%;
+}
+
+
+.mainImgContainer .btn-next{
+
+}
+.mainImgContainer .btn-prev{
+
+}
+
+
+.mainImgContainer img {
   width: 100%;
   border-radius: 17px;
 }
-
-#underlayImgsContainer {
+.mainImgContainer .underlayImgsContainer {
   display: flex;
 }
-
 .underlay-img {
   width: 100px;
   border-radius: 15px;
 }
-
 /*End imgs-Product */
 
 .imgs-price {
   width: 40%;
   margin-left: 8rem;
+  opacity: 0;
+  visibility: hidden;
 }
 
 .imgs-price > span:first-child {
@@ -628,9 +651,9 @@ main .container #overlay-imgs-Product {
   font-weight: 700;
   display: flex;
   align-items: center;
+  box-shadow: 0px 4px 9px 1px hsl(26, 100%, 55%);
   cursor: pointer;
 }
-
 .plus-minus .add-btn img {
   filter: invert(28%) sepia(31%) saturate(5768%) hue-rotate(229deg)
     brightness(265%) contrast(127%);
@@ -638,38 +661,43 @@ main .container #overlay-imgs-Product {
 }
 
 /* End Product */
-
 @media (min-width: 320px) and (max-width: 768px) {
   main .container {
     padding-top: 0px;
     padding-left: 0;
     padding-right: 0;
   }
-  #MasterImg {
+  .MasterImg {
     margin-bottom: 40px;
-  }
-  #MasterImg .btn-prev,
-  #MasterImg .btn-next {
-    display: block;
-  }
-  #MasterImg .btn-prev {
-    left: 35px;
-  }
-  #MasterImg .btn-next {
-    right: 0;
-  }
-
-  #MasterImg .shoes {
     border-radius: 0;
   }
-
-  #underContainer {
+  .MasterImg .btn-prev,
+  .MasterImg .btn-next {
+    display: block;
+  }
+  .MasterImg .btn-prev {
+    left: 35px;
+  }
+  .MasterImg .btn-next {
+    right: 0;
+  }
+  .underlayImgsContainer {
     display: none;
   }
-
   .imgs-Product {
     width: 100%;
   }
+  /* .modal-content{
+    justify-content: center;
+  } */
+  .overlay-imgs-Product #mainImgContainer{
+    width: 100%;
+    height: 60%;
+  }
+  .modal-content .slider{
+    height: 100%;
+  }
+
 
   .imgs-price {
     min-width: 100%;
@@ -741,5 +769,14 @@ main .container #overlay-imgs-Product {
 }
 
 
+.visible {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 1.8s ease;
+  -webkit-transition: opacity 1.8s ease;
+  -moz-transition: opacity 1.8s ease;
+  -ms-transition: opacity 1.8s ease;
+  -o-transition: opacity 1.8s ease;
+}
 
 
