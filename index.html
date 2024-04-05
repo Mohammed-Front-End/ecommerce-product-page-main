@@ -1,196 +1,198 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png" />
-  <!-- <link rel="preload" as="font" crossorigin type="font/woff2"
-      href="./Fonts/KumbhSans.woff2"> -->
-  <link rel="stylesheet" href="style.css" />
-  <title>Frontend Mentor | E-commerce product page</title>
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" sizes="32x32"
+      href="./images/favicon-32x32.png" />
 
-<body>
-  <!-- Start header -->
-  <header>
-    <nav>
-      <input type="checkbox" id="burger-checkbox" />
-      <label for="burger-checkbox" class="burger-menu"></label>
-      <div class="logo">
-        <a href="#"><img src="./images/logo.svg" alt="logo" /></a>
-      </div>
-      <div id="overlay"></div>
-      <ul class="menu-links" aria-expanded="false">
-        <button aria-label="close" aria-expanded="false" class="close"></button>
-        <li><a href="#">Collections</a></li>
-        <li><a href="#">Men</a></li>
-        <li><a href="#">Wowmen</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Contact</a></li>
-      </ul>
-      <div class="buy">
+    <link as="font" rel="preload" href="Fonts/KumbhSans.woff2" type="font/woff2" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css" />
+    <title>Frontend Mentor | E-commerce product page</title>
+  </head>
 
-        <div class="continer-Cart">
-          <button class="cart">
-            <span></span>
-          </button>
+  <body>
+    <!-- Start header -->
+    <header>
+      <nav>
+        <input type="checkbox" id="burger-checkbox" />
+        <label for="burger-checkbox" class="burger-menu"></label>
+        <div class="logo">
+          <a href="#"><img src="./images/logo.svg" alt="logo" /></a>
+        </div>
+        <div id="overlay"></div>
+        <ul class="menu-links" aria-expanded="false">
+          <button aria-label="close" aria-expanded="false"
+            class="close"></button>
+          <li><a href="#">Collections</a></li>
+          <li><a href="#">Men</a></li>
+          <li><a href="#">Wowmen</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+        <div class="buy">
 
-          <div class="show-Product">
-            <p class="cart-name">Cart</p>
-            <span class='emptySpan'> Your cart is empty. </span>
+          <div class="continer-Cart">
+            <button class="cart">
+              <span></span>
+            </button>
 
-            <section>
-              <span class="congratulations">Congratulations have been successfully done!</span>
-              <img src="./images/image-product-1-thumbnail.jpg" alt="img Product">
-              <div class="name-and-price">
-                <p class="nameProduct"></p>
+            <div class="show-Product">
+              <p class="cart-name">Cart</p>
+              <span class='emptySpan'> Your cart is empty. </span>
 
-                <div class="containerPrice">
-                  <p class="price-product"></p>
+              <section>
+                <span class="congratulations">Congratulations have been
+                  successfully done!</span>
+                <img src="./images/image-product-1-thumbnail.jpg"
+                  alt="img Product">
+                <div class="name-and-price">
+                  <p class="nameProduct"></p>
 
-                  <label for="quantity" class="native-dropdown ">
-                    <select name="quantity" class="count-product" id="quantity" tabindex="0">
-                    </select>
-                  </label>
+                  <div class="containerPrice">
+                    <p class="price-product"></p>
 
-                  <p class="totle-price"></p>
+                    <label for="quantity" class="native-dropdown ">
+                      <select name="quantity" class="count-product"
+                        id="quantity" tabindex="0">
+                      </select>
+                    </label>
+
+                    <p class="totle-price"></p>
+                  </div>
+
                 </div>
+                <button class="delete"></button>
+              </section>
 
+              <button class="Checkout">Checkout</button>
+            </div>
+          </div>
 
+          <a class="avatar" href><img src="./images/image-avatar.png"
+              alt="image-avatar" /></a>
+        </div>
+      </nav>
+    </header>
+    <!-- End header -->
 
+    <!-- Start Product -->
+    <main>
+      <div class="container">
+
+        <!-- Main of Img Product  -->
+        <section class="imgs-Product">
+
+          <!-- Start Large Photo Container -->
+          <div class="MasterImg" id="MasterImg">
+            <button class="btn-next">
+              <svg width="13" height="18" xmlns="http://www.w3.org/2000/svg">
+                <path d="m2 1 8 8-8 8" stroke="#1D2026" stroke-width="3"
+                  fill="none" fill-rule="evenodd" />
+              </svg>
+            </button>
+
+            <div class="slider">
+              <div class="item">
+                <img draggable="false" class="shoes"
+                  src="./images/image-product-1.jpg" alt="shoes-1">
               </div>
-              <button class="delete"></button>
-            </section>
+              <div class="item">
+                <img draggable="false" class="shoes"
+                  src="./images/image-product-2.jpg" alt="shoes-2">
+              </div>
+              <div class="item">
+                <img draggable="false" class="shoes"
+                  src="./images/image-product-3.jpg" alt="shoes-3">
+              </div>
+              <div class="item">
+                <img draggable="false" class="shoes"
+                  src="./images/image-product-4.jpg" alt="shoes-4">
+              </div>
+            </div>
 
-            <button class="Checkout">Checkout</button>
+            <button class="btn-prev">
+              <svg width="12" height="18" xmlns="http://www.w3.org/2000/svg">
+                <path d="M11 1 3 9l8 8" stroke="#1D2026" stroke-width="3"
+                  fill="none" fill-rule="evenodd" />
+              </svg>
+            </button>
           </div>
-        </div>
+          <!-- End Large Photo Container -->
+          <!-- Start Small Photo Container -->
+          <div class="underlayImgsContainer" id="underContainer">
+            <div class="item">
+              <img class="active" src="./images/image-product-1-thumbnail.jpg"
+                alt="Copy of photo-1">
+            </div>
 
-        <a class="avatar" href><img src="./images/image-avatar.png" alt="image-avatar" /></a>
-      </div>
-    </nav>
-  </header>
-  <!-- End header -->
+            <div class="item">
+              <img src="./images/image-product-2-thumbnail.jpg"
+                alt="Copy of photo-2">
+            </div>
 
+            <div class="item">
+              <img src="./images/image-product-3-thumbnail.jpg"
+                alt="Copy of photo-3">
+            </div>
 
-
-  <!-- Start Product -->
-<main>
-  <div class="container">
-
-
-
-  <!-- Main of Img Product  -->
-    <section class="imgs-Product">
-
-    <!-- Start Large Photo Container -->
-    <div class="MasterImg" id="MasterImg">
-      <button class="btn-next"  >
-        <svg width="13" height="18" xmlns="http://www.w3.org/2000/svg">
-          <path d="m2 1 8 8-8 8" stroke="#1D2026" stroke-width="3" fill="none" fill-rule="evenodd" />
-        </svg>
-      </button>
-
-      <div class="slider">
-        <div class="item">
-          <img draggable="false" class="shoes" src="./images/image-product-1.jpg" alt="shoes-1">
-        </div>
-        <div class="item">
-          <img draggable="false" class="shoes" src="./images/image-product-2.jpg" alt="shoes-2">
-        </div>
-        <div class="item">
-          <img draggable="false" class="shoes" src="./images/image-product-3.jpg" alt="shoes-3">
-        </div>
-        <div class="item">
-          <img draggable="false" class="shoes" src="./images/image-product-4.jpg" alt="shoes-4">
-        </div>
-      </div>
-      
-      <button class="btn-prev">
-        <svg width="12" height="18" xmlns="http://www.w3.org/2000/svg">
-          <path d="M11 1 3 9l8 8" stroke="#1D2026" stroke-width="3" fill="none" fill-rule="evenodd" />
-        </svg>
-      </button>
-    </div>
-  <!-- End Large Photo Container -->
-  <!-- Start Small Photo Container -->
-  <div class="underlayImgsContainer" id="underContainer">
-    <div class="item">
-      <img class="active" src="./images/image-product-1-thumbnail.jpg" alt="Copy of photo-1">
-    </div>
-
-    <div class="item">
-      <img  src="./images/image-product-2-thumbnail.jpg" alt="Copy of photo-2">
-    </div>
-
-    <div class="item">
-      <img  src="./images/image-product-3-thumbnail.jpg" alt="Copy of photo-3">
-    </div>
-
-    <div class="item">
-      <img  src="./images/image-product-4-thumbnail.jpg" alt="Copy of photo-4">
-    </div>
-  </div>
-  <!-- End Small Photo Container -->
-
-
-
-
-
-
-
-  <div id="overlay-imgs-Product" class="overlay-imgs-Product">
-        <div class="modal-content">
-          <button id="closeButton">
-            <svg width="14" height="15" xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="m11.596.782 2.122 2.122L9.12 7.499l4.597 4.597-2.122 2.122L7 9.62l-4.595 4.597-2.122-2.122L4.878 7.5.282 2.904 2.404.782l4.595 4.596L11.596.782Z"
-                fill="hsl(0, 0%, 100%)" fill-rule="evenodd" />
-            </svg>
-          </button> 
-
-          <div id="mainImgContainer"> </div>
-      </div> 
-    </section>
-
-
-
-
-
-
-      <section class="imgs-price">
-        <span>Sneaker company</span>
-        <h1>fall limited edition sneakers</h1>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid
-          expedita sequi perspiciatis eveniet facere praesentium perferendis
-          sed alias aspernatur. Id voluptates sed perspiciatis fugiat iure
-          voluptate odio, excepturi ipsum inventore.
-        </p>
-
-        <div class="span-price">
-          <div class="price">
-            <span>$125.00</span>
-            <i class="dicont">50%</i>
+            <div class="item">
+              <img src="./images/image-product-4-thumbnail.jpg"
+                alt="Copy of photo-4">
+            </div>
           </div>
-          <i class="original-price">$250.00</i>
+          <!-- End Small Photo Container -->
+
+          <div id="overlay-imgs-Product" class="overlay-imgs-Product">
+            <div class="modal-content">
+              <button id="closeButton" class="closeButton">
+                <svg width="14" height="15" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="m11.596.782 2.122 2.122L9.12 7.499l4.597 4.597-2.122 2.122L7 9.62l-4.595 4.597-2.122-2.122L4.878 7.5.282 2.904 2.404.782l4.595 4.596L11.596.782Z"
+                    fill-rule="evenodd" />
+                </svg>
+              </button>
+
+              <div id="mainImgContainer"> </div>
+            </div>
+          </section>
+
+          <section class="imgs-price">
+            <span>Sneaker company</span>
+            <h1>fall limited edition sneakers</h1>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid
+              expedita sequi perspiciatis eveniet facere praesentium perferendis
+              sed alias aspernatur. Id voluptates sed perspiciatis fugiat iure
+              voluptate odio, excepturi ipsum inventore.
+            </p>
+
+            <div class="span-price">
+              <div class="price">
+                <span>$125.00</span>
+                <i class="dicont">50%</i>
+              </div>
+              <i class="original-price">$250.00</i>
+            </div>
+
+            <div class="plus-minus">
+
+              <div class="add-remove">
+                <button class="minus"><img src="./images/icon-minus.svg"
+                    alt="icon-minus"></button>
+                <span>1</span>
+                <button class="plus"><img src="./images/icon-plus.svg"
+                    alt="icon-plus"></button>
+              </div>
+
+              <button class="add-btn"><img src="./images/icon-cart.svg"
+                  alt="icon-cart"> Add to cart</button>
+            </div>
+          </section>
         </div>
+      </main>
+      <!-- End Product -->
+      <script src="./script.js"></script>
+    </body>
 
-        <div class="plus-minus">
-
-          <div class="add-remove">
-            <button class="minus"><img src="./images/icon-minus.svg" alt="icon-minus"></button>
-            <span>1</span>
-            <button class="plus"><img src="./images/icon-plus.svg" alt="icon-plus"></button>
-          </div>
-
-          <button class="add-btn"><img src="./images/icon-cart.svg" alt="icon-cart"> Add to cart</button>
-        </div>
-      </section>
-    </div>
-  </main>
-  <!-- End Product -->
-  <script  src="./script.js"></script>
-</body>
-
-</html>
+  </html>

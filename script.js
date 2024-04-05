@@ -6,51 +6,39 @@ burgerMenu.addEventListener('click', function() {
   menuLinks.classList.toggle('open');
   burgerMenu.classList.toggle('open');
   const isMenuOpen = menuLinks.classList.contains("open");
+  console.log(isMenuOpen);
+  
   overlayMenu.style.opacity = isMenuOpen ? "1" : "0";
   overlayMenu.style.visibility = isMenuOpen ? "visible" : "hidden";
   overlayMenu.style.pointerEvents = isMenuOpen ? "auto" : "none";
+
+  
+
   menuLinks.setAttribute("aria-expanded", isMenuOpen.toString());
   closeButtonMenu.setAttribute("aria-expanded", isMenuOpen.toString());
 });
-document.querySelector('.close').addEventListener('click', function () {
+closeButtonMenu.addEventListener('click', function () {
   menuLinks.classList.remove("open");
   burgerMenu.classList.remove("open");
+
   overlayMenu.style.opacity = "0";
   overlayMenu.style.visibility = "hidden";
   overlayMenu.style.pointerEvents = "none";
+
   menuLinks.setAttribute("aria-expanded", "false");
   closeButtonMenu.setAttribute("aria-expanded", "false");
 });
 overlayMenu.addEventListener('click', function() {
   menuLinks.classList.remove("open");
   burgerMenu.classList.remove("open");
+
   overlayMenu.style.opacity = "0";
   overlayMenu.style.visibility = "hidden";
   overlayMenu.style.pointerEvents = "none";
+
   menuLinks.setAttribute("aria-expanded", "false");
   closeButtonMenu.setAttribute("aria-expanded", "false");
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 let largeImage = document.querySelector('.shoes');
 let smallImages = document.querySelectorAll('#underContainer img');
@@ -127,20 +115,6 @@ function updateAdjacentSmallImage(direction) {
   }
 }
 
-shoes.forEach(item => {
-  item.style.cursor = "grab";
-  item.addEventListener('mousedown', () => {
-    item.style.cursor = "grabbing";
-  });
-});
-
-
-
-document.addEventListener('mouseup', () => {
-  shoes.forEach(item => {
-    item.style.cursor = "grab";
-  });
-});
 function toggleclassActive() { 
   smallImages.forEach((img, index) => {
     img.classList.toggle('active', index === currentIndex);
@@ -409,13 +383,13 @@ if (numberOfProcduct.innerHTML === '0' || numberOfProcduct.textContent === '') {
 }
 }
 cart.addEventListener('click', function() {
-showProduct.style.display = 'flex';
+  showProduct.style.display = 'flex';
 });
 document.addEventListener('click', function(event) {
-const target = event.target;
-if (!showProduct.contains(target) && target !== cart) {
-    showProduct.style.display = 'none';
-}
+  const target = event.target;
+  if (!showProduct.contains(target) && target !== cart) {
+      showProduct.style.display = 'none';
+  }
 });
 plus.addEventListener('click',function(e){
   let currentValue = parseInt(addRemove.innerHTML);
@@ -545,3 +519,13 @@ if (selectIndex !== -1) {
 })
 }
 deleteItem()
+
+
+
+
+
+
+
+
+
+
